@@ -1,4 +1,4 @@
-package com.xenon.simplyrecipes;
+package com.xenon.simplyrecipes.views;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.html.Paragraph;
