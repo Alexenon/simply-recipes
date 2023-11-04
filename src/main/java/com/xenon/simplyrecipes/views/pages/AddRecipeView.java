@@ -2,6 +2,7 @@ package com.xenon.simplyrecipes.views.pages;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -12,6 +13,7 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.theme.lumo.LumoIcon;
 import com.xenon.simplyrecipes.models.Ingredient;
 
 import java.util.ArrayList;
@@ -22,8 +24,10 @@ import java.util.List;
 public class AddRecipeView extends VerticalLayout {
     private static final int DEFAULT_INGREDIENT_AMOUNT = 0;
 
-    TextField recipeName = new TextField("Recipe name");
-    TextArea recipeDescription = new TextArea("Description");
+    TextField receipeName = new TextField("Recipe name");
+    TextArea receipeDescription = new TextArea("Description");
+    IntegerField receipeDuration = new IntegerField("Duration");
+
     TextField ingredientName = new TextField("Ingredient name");
     IntegerField ingredientAmount = new IntegerField("Amount");
     Button addIngredientBtn = new Button("Add ingredient");
@@ -31,7 +35,7 @@ public class AddRecipeView extends VerticalLayout {
     List<Ingredient> ingredients = new ArrayList<>();
 
     public AddRecipeView() {
-        add(recipeName, recipeDescription);
+        add(receipeName, receipeDescription, receipeDuration);
         HorizontalLayout layout = new HorizontalLayout(ingredientName, ingredientAmount, addIngredientBtn);
         layout.setDefaultVerticalComponentAlignment(Alignment.CENTER);
 
@@ -42,6 +46,17 @@ public class AddRecipeView extends VerticalLayout {
     private void addStyle() {
         ingredientName.addClassName("ingredient-name");
         ingredientName.setHelperText("Example: Eggs");
+
+        receipeDuration.setMin(0);
+        receipeDuration.setValue(0);
+        receipeDuration.setStepButtonsVisible(true);
+        receipeDuration.setStep(10);
+
+        Paragraph helperText = new Paragraph("Duration in minutes");
+        helperText.getStyle().set("display", "inline");
+        Div div = new Div(LumoIcon.CLOCK.create(), helperText);
+        div.getStyle().set("display", "inline");
+        receipeDuration.setHelperComponent(div);
 
         ingredientAmount.setMin(DEFAULT_INGREDIENT_AMOUNT);
         ingredientAmount.setValue(DEFAULT_INGREDIENT_AMOUNT);

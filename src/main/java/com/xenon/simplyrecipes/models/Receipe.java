@@ -9,4 +9,5 @@ public class Receipe {
     String name;
     String description;
     List<Ingredient> ingredients;
+    Integer duration;
 }
