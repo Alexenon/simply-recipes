@@ -15,6 +15,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoIcon;
 import com.xenon.simplyrecipes.models.Ingredient;
+import com.xenon.simplyrecipes.models.Receipe;
+import com.xenon.simplyrecipes.views.components.UploadImage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,8 @@ public class AddRecipeView extends VerticalLayout {
     TextArea receipeDescription = new TextArea("Description");
     IntegerField receipeDuration = new IntegerField("Duration");
 
+    UploadImage uploadImage = new UploadImage();
+
     TextField ingredientName = new TextField("Ingredient name");
     IntegerField ingredientAmount = new IntegerField("Amount");
     Button addIngredientBtn = new Button("Add ingredient");
@@ -35,12 +39,22 @@ public class AddRecipeView extends VerticalLayout {
     List<Ingredient> ingredients = new ArrayList<>();
 
     public AddRecipeView() {
-        add(receipeName, receipeDescription, receipeDuration);
+        add(uploadImage, receipeName, receipeDescription, receipeDuration);
         HorizontalLayout layout = new HorizontalLayout(ingredientName, ingredientAmount, addIngredientBtn);
         layout.setDefaultVerticalComponentAlignment(Alignment.CENTER);
 
         addStyle();
         add(layout);
+    }
+
+    public Receipe getReceipe() {
+        return new Receipe(
+                receipeName.getValue(),
+                receipeDescription.getValue(),
+                ingredients,
+                receipeDuration.getValue(),
+                uploadImage.getUploadedFilePath()
+        );
     }
 
     private void addStyle() {
