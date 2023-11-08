@@ -1,18 +1,19 @@
 package com.xenon.simplyrecipes.views.pages;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoIcon;
 import com.xenon.simplyrecipes.models.Ingredient;
 import com.xenon.simplyrecipes.models.Receipe;
@@ -21,35 +22,42 @@ import com.xenon.simplyrecipes.views.components.UploadImage;
 import java.util.ArrayList;
 import java.util.List;
 
-@Route("add-recipe")
-@PageTitle("Add Recipe")
-public class AddRecipeView extends VerticalLayout {
+/*
+* https://food52.com/recipes/new
+* */
+
+public class AddRecipeDialog extends Dialog {
     private static final int DEFAULT_INGREDIENT_AMOUNT = 0;
 
-    TextField receipeName = new TextField("Recipe name");
-    TextArea receipeDescription = new TextArea("Description");
-    IntegerField receipeDuration = new IntegerField("Duration");
+    private final TextField receipeTitle = new TextField("Recipe Title");
+    private final TextArea receipeDescription = new TextArea("Description");
+    private final IntegerField receipeDuration = new IntegerField("Duration");
 
-    UploadImage uploadImage = new UploadImage();
+    private final UploadImage uploadImage = new UploadImage();
 
-    TextField ingredientName = new TextField("Ingredient name");
-    IntegerField ingredientAmount = new IntegerField("Amount");
-    Button addIngredientBtn = new Button("Add ingredient");
+    private final TextField ingredientName = new TextField("Ingredient name");
+    private final IntegerField ingredientAmount = new IntegerField("Amount");
+    private final Button addIngredientBtn = new Button("Add ingredient");
 
-    List<Ingredient> ingredients = new ArrayList<>();
+    private final List<Ingredient> ingredients = new ArrayList<>();
 
-    public AddRecipeView() {
-        add(uploadImage, receipeName, receipeDescription, receipeDuration);
-        HorizontalLayout layout = new HorizontalLayout(ingredientName, ingredientAmount, addIngredientBtn);
-        layout.setDefaultVerticalComponentAlignment(Alignment.CENTER);
+    public AddRecipeDialog() {
+        VerticalLayout dialogLayout = new VerticalLayout(uploadImage, receipeTitle, receipeDescription, receipeDuration);
 
+        HorizontalLayout layoutForIngredients = new HorizontalLayout(ingredientName, ingredientAmount, addIngredientBtn);
+        layoutForIngredients.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
+
+        dialogLayout.add(layoutForIngredients);
+        add(dialogLayout);
+
+        setupDialog();
         addStyle();
-        add(layout);
+        add(layoutForIngredients);
     }
 
     public Receipe getReceipe() {
         return new Receipe(
-                receipeName.getValue(),
+                receipeTitle.getValue(),
                 receipeDescription.getValue(),
                 ingredients,
                 receipeDuration.getValue(),
@@ -57,14 +65,33 @@ public class AddRecipeView extends VerticalLayout {
         );
     }
 
+    private void setupDialog() {
+        this.setWidth("600px");
+        this.setHeaderTitle("Add a new receipe");
+
+        Button cancelButton = new Button("Cancel", (e) -> this.close());
+        cancelButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        cancelButton.getStyle().set("margin-right", "auto");
+        this.getFooter().add(cancelButton);
+
+        Button saveButton = new Button("Save", (e) -> this.close());
+        saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
+        this.getFooter().add(saveButton);
+    }
+
     private void addStyle() {
+        receipeTitle.addClassName("receipe-title");
+        receipeTitle.setWidth("500px");
+        receipeDescription.addClassName("receipe-description");
+        receipeDescription.setWidth("500px");
+
         ingredientName.addClassName("ingredient-name");
         ingredientName.setHelperText("Example: Eggs");
 
         receipeDuration.setMin(0);
         receipeDuration.setValue(0);
         receipeDuration.setStepButtonsVisible(true);
-        receipeDuration.setStep(10);
+        receipeDuration.setStep(5);
 
         Paragraph helperText = new Paragraph("Duration in minutes");
         helperText.getStyle().set("display", "inline");
@@ -103,11 +130,12 @@ public class AddRecipeView extends VerticalLayout {
             Checkbox checkbox = new Checkbox();
 
             addClassName("ingredient-layout");
-            setDefaultVerticalComponentAlignment(Alignment.CENTER);
             add(checkbox, this.ingredientName, this.ingredientAmount, removeIcon);
         }
 
         private void addStyle() {
+            setWidth("500px");
+            setDefaultVerticalComponentAlignment(Alignment.CENTER);
             removeIcon.setColor("red");
             removeIcon.addClickListener(event -> this.removeFromParent());
         }
