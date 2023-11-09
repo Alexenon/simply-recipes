@@ -7,10 +7,10 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class Receipe {
+public class Recipe {
     String name;
     String description;
     List<Ingredient> ingredients;
     Integer duration;
-    String imageLocation;
+    String imageName;
 }

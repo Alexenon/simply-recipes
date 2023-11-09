@@ -16,7 +16,7 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.theme.lumo.LumoIcon;
 import com.xenon.simplyrecipes.models.Ingredient;
-import com.xenon.simplyrecipes.models.Receipe;
+import com.xenon.simplyrecipes.models.Recipe;
 import com.xenon.simplyrecipes.views.components.UploadImage;
 
 import java.util.ArrayList;
@@ -55,8 +55,8 @@ public class AddRecipeDialog extends Dialog {
         add(layoutForIngredients);
     }
 
-    public Receipe getReceipe() {
-        return new Receipe(
+    public Recipe getReceipe() {
+        return new Recipe(
                 receipeTitle.getValue(),
                 receipeDescription.getValue(),
                 ingredients,
@@ -66,7 +66,6 @@ public class AddRecipeDialog extends Dialog {
     }
 
     private void setupDialog() {
-        this.setWidth("600px");
         this.setHeaderTitle("Add a new receipe");
 
         Button cancelButton = new Button("Cancel", (e) -> this.close());
@@ -80,10 +79,8 @@ public class AddRecipeDialog extends Dialog {
     }
 
     private void addStyle() {
-        receipeTitle.addClassName("receipe-title");
-        receipeTitle.setWidth("500px");
-        receipeDescription.addClassName("receipe-description");
-        receipeDescription.setWidth("500px");
+        receipeTitle.addClassName("dialog-field");
+        receipeDescription.addClassName("dialog-field");
 
         ingredientName.addClassName("ingredient-name");
         ingredientName.setHelperText("Example: Eggs");
@@ -134,7 +131,6 @@ public class AddRecipeDialog extends Dialog {
         }
 
         private void addStyle() {
-            setWidth("500px");
             setDefaultVerticalComponentAlignment(Alignment.CENTER);
             removeIcon.setColor("red");
             removeIcon.addClickListener(event -> this.removeFromParent());

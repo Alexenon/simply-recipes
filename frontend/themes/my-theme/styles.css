@@ -6,15 +6,21 @@ vaadin-button {
     margin: 0;
 }
 
-vaadin-text-area {
+vaadin-text-area,
+vaadin-text-field,
+vaadin-vertical-layout {
     padding: 0;
 }
 
-vaadin-text-field {
-   padding: 0;
+.dialog-field {
+    width: 100%;
 }
 
 .ingredient-name,
 .add-ingredient-btn {
     margin-top: 16px;
+}
+
+.ingredient-layout {
+    width: 100%;
 }
