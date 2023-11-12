@@ -6,10 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "recipes")
+@Entity(name = "cooking-steps")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class CookingStep {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +21,10 @@ public class Category {
     @Getter
     @Setter
     private String name;
+
+    @ManyToOne
+    @Getter
+    @Setter
+    private Recipe recipe;
+
 }

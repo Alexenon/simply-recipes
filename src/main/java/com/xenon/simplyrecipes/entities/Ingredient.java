@@ -3,7 +3,7 @@ package com.xenon.simplyrecipes.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
+@Entity(name = "ingredients")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Ingredient {
@@ -23,4 +23,9 @@ public class Ingredient {
     @Getter
     @Setter
     private int amount;
+
+    @ManyToOne
+    @Getter
+    @Setter
+    private Recipe recipe;
 }

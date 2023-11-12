@@ -6,19 +6,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "recipes")
+@Entity(name = "comments")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
-    private long id;
+    private Long id;
 
-    @Column(unique = true, nullable = false)
     @Getter
     @Setter
-    private String name;
+    private String text;
+
+    @ManyToOne
+    @Getter
+    @Setter
+    private User user;
+
+    @ManyToOne
+    @Getter
+    @Setter
+    private Recipe recipe;
+
 }
