@@ -15,10 +15,11 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.theme.lumo.LumoIcon;
-import com.xenon.simplyrecipes.models.Ingredient;
-import com.xenon.simplyrecipes.models.Recipe;
+import com.xenon.simplyrecipes.entities.Ingredient;
+import com.xenon.simplyrecipes.entities.Recipe;
 import com.xenon.simplyrecipes.views.components.UploadImage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,13 +57,15 @@ public class AddRecipeDialog extends Dialog {
     }
 
     public Recipe getReceipe() {
-        return new Recipe(
-                receipeTitle.getValue(),
-                receipeDescription.getValue(),
-                ingredients,
-                receipeDuration.getValue(),
-                uploadImage.getUploadedFilePath()
-        );
+        return null;
+//        return new Recipe(
+//                receipeTitle.getValue(),
+//                receipeDescription.getValue(),
+//                uploadImage.getUploadedFilePath(),
+//                receipeDuration.getValue(),
+//                ingredients,
+//                LocalDate.now()
+//        );
     }
 
     private void setupDialog() {
@@ -137,10 +140,11 @@ public class AddRecipeDialog extends Dialog {
         }
 
         public Ingredient getIngredient() {
-            return new Ingredient(
-                    ingredientName.getText(),
-                    Integer.parseInt(ingredientAmount.getText())
-            );
+            return null;
+//            return new Ingredient(
+//                    ingredientName.getText(),
+//                    Integer.parseInt(ingredientAmount.getText())
+//            );
         }
     }
 
