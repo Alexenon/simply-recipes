@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "recipes")
+@Entity(name = "categories")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category {

@@ -34,20 +34,20 @@ public class Recipe {
     @Setter
     private Integer durationInSeconds; // preparing duration in seconds
 
-    @ManyToOne
+    @OneToMany(mappedBy = "recipe")
     @Getter
     @Setter
-    private Category category;
+    private List<RecipeCategory> recipeCategories;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recipe")
     @Getter
     @Setter
-    private List<Ingredient> ingredients;
+    private List<RecipeIngredient> recipeIngredients;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "recipe")
     @Getter
     @Setter
-    private List<CookingStep> cookingSteps;
+    private RecipeCookingStep recipeCookingStep;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     @Getter
