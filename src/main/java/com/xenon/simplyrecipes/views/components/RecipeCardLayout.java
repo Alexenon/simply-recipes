@@ -1,6 +1,8 @@
 package com.xenon.simplyrecipes.views.components;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
@@ -20,7 +22,7 @@ public class RecipeCardLayout extends Div {
     Image image;
     Paragraph description;
     Paragraph duration = new Paragraph();
-    Button showBtn = new Button("Show");
+    Button showBtn = new Button("Show", new Icon(VaadinIcon.ARROW_RIGHT));
 
     public RecipeCardLayout(Recipe recipe) {
         this.recipe = recipe;
@@ -30,7 +32,9 @@ public class RecipeCardLayout extends Div {
         image.setAlt(recipe.getImageName());
         description = new Paragraph(recipe.getDescription());
         duration.setText(recipe.getPreparingDuration().toString() + " mins");
+
         initialize();
+        costumize();
     }
 
     private void initialize() {
@@ -39,14 +43,20 @@ public class RecipeCardLayout extends Div {
         Div imageContainer = new Div(image);
         imageContainer.addClassName("image");
 
-        Div cardContent = new Div(title, description);
+        Div durationDiv = new Div(VaadinIcon.CLOCK.create(), duration);
+        durationDiv.addClassName("duration");
+        Div cardFooter = new Div(durationDiv, showBtn);
+        cardFooter.addClassName("card-footer");
+
+        Div cardContent = new Div(title, description, cardFooter);
         cardContent.addClassName("content");
 
-        Div durationDiv = new Div(VaadinIcon.CLOSE_SMALL.create(), duration);
-        Div cardFooter = new Div(durationDiv, showBtn);
-
-
         add(imageContainer, cardContent, cardFooter);
+    }
+
+    private void costumize() {
+        showBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
+        showBtn.setIconAfterText(true);
     }
 
 }

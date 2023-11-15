@@ -14,7 +14,6 @@ import java.time.LocalDate;
 
 @PageTitle("Home")
 @Route(value = "", layout = MainLayout.class)
-@CssImport("./themes/my-theme/css/card.css")
 public class HomeView extends Main {
 
     AddRecipeDialog addRecipeDialog = new AddRecipeDialog();
@@ -36,7 +35,6 @@ public class HomeView extends Main {
         recipe.setRecipeCookingStep(null);
         recipe.setDateCreated(LocalDate.now());
 
-        RecipeCardLayout recipeCardLayout = new RecipeCardLayout(recipe);
-        add(recipeCardLayout);
+        add(new RecipeCardLayout(recipe));
     }
 }
