@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=Playball&family=Poppins:wght@200;300;500;700;800;900&display=swap');
+
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    width: 350px;
+    height: 300px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+    transition: 0.5s;
+}
+
+.card:hover{
+    height: 200px;
+}
+
+.card .image{
+    position: absolute;
+    top: 20px;
+    width: 300px;
+    height: 200px;
+    background-color: #33d;
+    border-radius: 12px;
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.card:hover .image{
+     top: -100px;
+     scale: 0.75;
+     box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+}
+
+.card .image img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card .content{
+    position: absolute;
+    width: 100%;
+    padding: 0 30px;
+    text-align: center;
+    top: 235px;
+    height: 40px;
+    overflow: hidden;
+    transition: 0.5s;
+    /* border: 2px solid red; */
+}
+
+.card:hover .content{
+    top: 120px;
+    height: 250px;
+}
+
+.card .content h2{
+    color: purple;
+    font-size: 1.5em;
+    font-weight: 900;
+}
+
+.card .content p{
+    color: #333;
+    font-size: 1.05em;
+}
+
+.card .content a{
+    position: relative;
+    top: 15px;
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #33d;
+    color: #ffff;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 8px;
+}

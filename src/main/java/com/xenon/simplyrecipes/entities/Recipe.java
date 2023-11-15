@@ -32,7 +32,7 @@ public class Recipe {
 
     @Getter
     @Setter
-    private Integer durationInSeconds; // preparing duration in seconds
+    private Integer preparingDuration; // In minutes
 
     @OneToMany(mappedBy = "recipe")
     @Getter
