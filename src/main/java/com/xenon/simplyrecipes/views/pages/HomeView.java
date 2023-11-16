@@ -1,7 +1,7 @@
 package com.xenon.simplyrecipes.views.pages;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
@@ -23,6 +23,8 @@ public class HomeView extends Main {
         addClassName("container");
 
         Button addReceipeBtn = new Button("Add Recipe", e -> addRecipeDialog.open());
+        //<theme-editor-local-classname>
+        addReceipeBtn.addClassName("home-view-button-1");
         add(addReceipeBtn);
 
         Recipe recipe = new Recipe();
@@ -35,6 +37,19 @@ public class HomeView extends Main {
         recipe.setRecipeCookingStep(null);
         recipe.setDateCreated(LocalDate.now());
 
-        add(new RecipeCardLayout(recipe));
+        Div pageContent = new Div();
+        pageContent.addClassName("page-content");
+
+        pageContent.add(new RecipeCardLayout(recipe));
+        pageContent.add(new RecipeCardLayout(recipe));
+        pageContent.add(new RecipeCardLayout(recipe));
+        pageContent.add(new RecipeCardLayout(recipe));
+        pageContent.add(new RecipeCardLayout(recipe));
+        pageContent.add(new RecipeCardLayout(recipe));
+        pageContent.add(new RecipeCardLayout(recipe));
+        pageContent.add(new RecipeCardLayout(recipe));
+        pageContent.add(new RecipeCardLayout(recipe));
+
+        add(pageContent);
     }
 }

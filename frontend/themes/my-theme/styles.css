@@ -1,3 +1,4 @@
+@import "theme-editor.css";
 @import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=Playball&family=Poppins:wght@200;300;500;700;800;900&display=swap');
 
 @import 'css/card.css';
@@ -27,4 +28,16 @@ vaadin-vertical-layout {
 
 .ingredient-layout {
     width: 100%;
+}
+
+
+
+
+/*************************************/
+
+.page-content {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+    justify-content: center;
 }
