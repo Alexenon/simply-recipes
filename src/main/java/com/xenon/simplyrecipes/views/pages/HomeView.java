@@ -35,7 +35,7 @@ public class HomeView extends Main {
         recipe.setImageName("pizza.jpg");
         recipe.setComments(null);
         recipe.setRecipeCategories(null);
-        recipe.setRecipeCookingStep(null);
+//        recipe.setRecipeCookingStep(null);
         recipe.setDateCreated(LocalDate.now());
 
         Div pageContent = new Div();

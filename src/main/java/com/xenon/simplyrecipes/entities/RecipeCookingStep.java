@@ -16,8 +16,7 @@ public class RecipeCookingStep {
     @Setter
     private Recipe recipe;
 
-    @Column(name = "step_name")
     @Getter
     @Setter
-    private String stepName;
+    private String step;
 }

@@ -44,10 +44,10 @@ public class Recipe {
     @Setter
     private List<RecipeIngredient> recipeIngredients;
 
-    @OneToOne(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe")
     @Getter
     @Setter
-    private RecipeCookingStep recipeCookingStep;
+    private List<RecipeCookingStep> recipeCookingSteps;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     @Getter
