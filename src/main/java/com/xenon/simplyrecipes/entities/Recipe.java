@@ -1,17 +1,15 @@
 package com.xenon.simplyrecipes.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity(name = "recipes")
-@NoArgsConstructor
-@AllArgsConstructor
+@EqualsAndHashCode(exclude = {"ingredients"})
 public class Recipe {
 
     @Id
@@ -34,17 +32,17 @@ public class Recipe {
     @Setter
     private Integer preparingDuration; // In minutes
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     @Getter
     @Setter
     private List<Category> categories;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     @Getter
     @Setter
     private List<Ingredient> ingredients;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     @Getter
     @Setter
     private List<CookingStep> cookingSteps;

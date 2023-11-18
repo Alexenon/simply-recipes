@@ -1,5 +1,6 @@
 package com.xenon.simplyrecipes.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,8 @@ public class Ingredient {
     private int amount;
 
     @ManyToOne
+    @JoinColumn(name = "recipe_id")
+    @JsonIgnore
     @Getter
     @Setter
     private Recipe recipe;

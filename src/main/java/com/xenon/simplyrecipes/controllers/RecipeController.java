@@ -1,7 +1,9 @@
 package com.xenon.simplyrecipes.controllers;
 
 import com.xenon.simplyrecipes.data.requests.RecipeRequest;
+import com.xenon.simplyrecipes.entities.Ingredient;
 import com.xenon.simplyrecipes.entities.Recipe;
+import com.xenon.simplyrecipes.services.IngredientService;
 import com.xenon.simplyrecipes.services.RecipeService;
 import com.xenon.simplyrecipes.utils.JsonObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
+    @Autowired
+    private IngredientService ingredientService;
+
     @GetMapping("/all")
     public ResponseEntity<List<Recipe>> getAllRecipes() {
         List<Recipe> recipes = recipeService.getAllRecipes();
@@ -37,14 +42,13 @@ public class RecipeController {
     public Recipe createRecipe(@RequestBody RecipeRequest request) {
         Recipe recipe = JsonObjectMapper.toRecipe(request);
         recipe.setDateCreated(LocalDate.now());
-        return recipeService.createRecipe(recipe);
-    }
 
-//    @PostMapping("/add")
-//    public ResponseEntity<Recipe> createRecipe(@RequestBody Recipe recipe) {
-//        Recipe createdRecipe = recipeService.createRecipe(recipe);
-//        return new ResponseEntity<>(createdRecipe, HttpStatus.CREATED);
-//    }
+        Recipe result = recipeService.createRecipe(recipe);
+        result.getIngredients().forEach(e -> e.setRecipe(result));
+        ingredientService.addIngredients(result.getIngredients());
+
+        return result;
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @RequestBody Recipe updatedRecipe) {

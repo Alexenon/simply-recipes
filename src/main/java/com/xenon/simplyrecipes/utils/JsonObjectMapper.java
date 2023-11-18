@@ -1,11 +1,16 @@
 package com.xenon.simplyrecipes.utils;
 
 import com.xenon.simplyrecipes.data.requests.CategoryRequest;
+import com.xenon.simplyrecipes.data.requests.CookingStepRequest;
 import com.xenon.simplyrecipes.data.requests.IngredientRequest;
 import com.xenon.simplyrecipes.data.requests.RecipeRequest;
 import com.xenon.simplyrecipes.entities.Category;
+import com.xenon.simplyrecipes.entities.CookingStep;
 import com.xenon.simplyrecipes.entities.Ingredient;
 import com.xenon.simplyrecipes.entities.Recipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class JsonObjectMapper {
 
@@ -34,5 +39,6 @@ public class JsonObjectMapper {
 
         return recipe;
     }
+
 
 }
