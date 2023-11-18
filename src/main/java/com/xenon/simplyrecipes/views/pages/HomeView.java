@@ -8,6 +8,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.xenon.simplyrecipes.entities.Recipe;
 import com.xenon.simplyrecipes.views.MainLayout;
+import com.xenon.simplyrecipes.views.components.AddRecipeDialog;
 import com.xenon.simplyrecipes.views.components.RecipeCardLayout;
 
 import java.time.LocalDate;
