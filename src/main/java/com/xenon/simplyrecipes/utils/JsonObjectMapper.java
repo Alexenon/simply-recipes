@@ -28,7 +28,9 @@ public class JsonObjectMapper {
         recipe.setDescription(request.getDescription());
         recipe.setImageName(request.getImageName());
         recipe.setPreparingDuration(request.getPreparingDuration());
-        // TODO ....
+        recipe.setCategories(request.getCategories());
+        recipe.setIngredients(request.getIngredients());
+        recipe.setCookingSteps(request.getCookingSteps());
 
         return recipe;
     }

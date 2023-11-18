@@ -24,4 +24,9 @@ public class Ingredient {
     @Setter
     private int amount;
 
+    @ManyToOne
+    @Getter
+    @Setter
+    private Recipe recipe;
+
 }

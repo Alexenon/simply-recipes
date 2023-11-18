@@ -37,17 +37,17 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe")
     @Getter
     @Setter
-    private List<RecipeCategory> recipeCategories;
+    private List<Category> categories;
 
     @OneToMany(mappedBy = "recipe")
     @Getter
     @Setter
-    private List<RecipeIngredient> recipeIngredients;
+    private List<Ingredient> ingredients;
 
     @OneToMany(mappedBy = "recipe")
     @Getter
     @Setter
-    private List<RecipeCookingStep> recipeCookingSteps;
+    private List<CookingStep> cookingSteps;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     @Getter

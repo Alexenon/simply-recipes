@@ -21,4 +21,9 @@ public class Category {
     @Getter
     @Setter
     private String name;
+
+    @ManyToOne
+    @Getter
+    @Setter
+    private Recipe recipe;
 }
