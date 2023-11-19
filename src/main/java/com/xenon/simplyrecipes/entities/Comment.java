@@ -20,6 +20,8 @@ public class Comment {
     @Setter
     private String text;
 
+    /*TODO: THINK ABOUT THIS*/
+
     @ManyToOne
     @Getter
     @Setter

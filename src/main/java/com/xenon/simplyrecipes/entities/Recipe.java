@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity(name = "recipes")
-@EqualsAndHashCode(exclude = {"ingredients"})
 public class Recipe {
 
     @Id

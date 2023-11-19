@@ -1,9 +1,10 @@
 package com.xenon.simplyrecipes.controllers;
 
 import com.xenon.simplyrecipes.data.requests.RecipeRequest;
-import com.xenon.simplyrecipes.entities.Ingredient;
 import com.xenon.simplyrecipes.entities.Recipe;
+import com.xenon.simplyrecipes.services.CookingStepService;
 import com.xenon.simplyrecipes.services.IngredientService;
+import com.xenon.simplyrecipes.services.RecipeManagementService;
 import com.xenon.simplyrecipes.services.RecipeService;
 import com.xenon.simplyrecipes.utils.JsonObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class RecipeController {
     private RecipeService recipeService;
 
     @Autowired
-    private IngredientService ingredientService;
+    private RecipeManagementService recipeManagementService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Recipe>> getAllRecipes() {
@@ -40,14 +41,8 @@ public class RecipeController {
 
     @PostMapping("/add")
     public Recipe createRecipe(@RequestBody RecipeRequest request) {
-        Recipe recipe = JsonObjectMapper.toRecipe(request);
-        recipe.setDateCreated(LocalDate.now());
-
-        Recipe result = recipeService.createRecipe(recipe);
-        result.getIngredients().forEach(e -> e.setRecipe(result));
-        ingredientService.addIngredients(result.getIngredients());
-
-        return result;
+        Recipe receivedRecipe = JsonObjectMapper.toRecipe(request);
+        return recipeManagementService.saveRecipe(receivedRecipe);
     }
 
     @PutMapping("/{id}")

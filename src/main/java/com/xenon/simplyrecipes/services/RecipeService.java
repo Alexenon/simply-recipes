@@ -5,6 +5,7 @@ import com.xenon.simplyrecipes.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +23,14 @@ public class RecipeService {
         return recipeRepository.findById(id);
     }
 
-    public Recipe createRecipe(Recipe recipe) {
+    public Recipe addRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);
+    }
+
+    public Recipe saveRecipe(Recipe recipe) {
+        Recipe savedRecipe = recipeRepository.save(recipe);
+        recipe.setDateCreated(LocalDate.now());
+        return savedRecipe;
     }
 
     public Recipe updateRecipe(Long id, Recipe updatedRecipe) {
