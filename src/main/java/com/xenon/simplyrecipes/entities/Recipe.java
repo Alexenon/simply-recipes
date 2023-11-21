@@ -1,7 +1,6 @@
 package com.xenon.simplyrecipes.entities;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,7 +30,16 @@ public class Recipe {
     @Setter
     private Integer preparingDuration; // In minutes
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    @Getter
+    @Setter
+    private Integer cookingDuration; // In minutesу
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "recipe_category",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
     @Getter
     @Setter
     private List<Category> categories;

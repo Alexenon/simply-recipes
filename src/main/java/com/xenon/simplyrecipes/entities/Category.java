@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity(name = "categories")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,8 +24,8 @@ public class Category {
     @Setter
     private String name;
 
-    @ManyToOne
+    @ManyToMany(mappedBy = "categories")
     @Getter
     @Setter
-    private Recipe recipe;
+    private List<Recipe> recipes;
 }

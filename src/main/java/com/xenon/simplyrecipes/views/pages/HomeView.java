@@ -29,7 +29,8 @@ public class HomeView extends Main {
         Recipe recipe = new Recipe();
         recipe.setName("Pizza");
         recipe.setDescription("Pepperoni is a variety of spicy salami made from cured pork and beef seasoned with paprika or other chili pepper. Prior to cooking, pepperoni is characteristically soft, slightly smoky, and bright red.");
-        recipe.setPreparingDuration(300);
+        recipe.setPreparingDuration(10);
+        recipe.setCookingDuration(300);
         recipe.setImageName("pizza.jpg");
         recipe.setComments(null);
         recipe.setCategories(null);

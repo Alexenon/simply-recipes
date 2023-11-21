@@ -15,6 +15,7 @@ public class RecipeRequest {
     String description;
     String imageName;
     Integer preparingDuration;
+    Integer cookingDuration;
     List<Category> categories;
     List<Ingredient> ingredients;
     List<CookingStep> cookingSteps;

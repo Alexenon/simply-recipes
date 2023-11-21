@@ -23,6 +23,7 @@ public class Comment {
     /*TODO: THINK ABOUT THIS*/
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     @Getter
     @Setter
     private User user;
