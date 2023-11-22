@@ -41,3 +41,16 @@ vaadin-vertical-layout {
     padding: 30px;
     justify-content: center;
 }
+
+.recipe-form {
+    margin: 35px 200px 35px 200px;
+    padding: 30px;
+    width: 300px;
+    /*border: 1px solid black;*/
+    border-radius: 5px;
+    box-shadow: 0 1px 5px 1px #eaeaea;
+}
+
+.recipe-input {
+    border: 1px solid rgb(234, 234, 234);
+}

@@ -29,10 +29,9 @@ public class IngredientLayout extends HorizontalLayout {
     }
 
     public Ingredient getIngredient() {
-        return null;
-//            return new Ingredient(
-//                    ingredientName.getText(),
-//                    Integer.parseInt(ingredientAmount.getText())
-//            );
+        Ingredient ingredient = new Ingredient();
+        ingredient.setName(ingredientName.getText());
+        ingredient.setAmount(Integer.parseInt(ingredientAmount.getText()));
+        return ingredient;
     }
 }

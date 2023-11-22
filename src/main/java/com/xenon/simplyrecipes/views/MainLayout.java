@@ -2,7 +2,7 @@ package com.xenon.simplyrecipes.views;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.html.Paragraph;
-import com.xenon.simplyrecipes.views.components.AddRecipeDialog;
+import com.xenon.simplyrecipes.views.pages.AddRecipeView;
 import com.xenon.simplyrecipes.views.pages.CategoriesView;
 
 public class MainLayout extends AppLayout {
@@ -11,7 +11,7 @@ public class MainLayout extends AppLayout {
         super();
 
         Paragraph addRecipe = new Paragraph("Add Recipe");
-        addRecipe.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate(AddRecipeDialog.class)));
+        addRecipe.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate(AddRecipeView.class)));
 
         Paragraph categories = new Paragraph("Categories");
         categories.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate(CategoriesView.class)));

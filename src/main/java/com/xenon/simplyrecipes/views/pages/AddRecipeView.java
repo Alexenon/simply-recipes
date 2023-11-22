@@ -1,6 +1,7 @@
 package com.xenon.simplyrecipes.views.pages;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.html.Paragraph;
@@ -13,11 +14,15 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoIcon;
+import com.xenon.simplyrecipes.entities.Category;
+import com.xenon.simplyrecipes.entities.CookingStep;
 import com.xenon.simplyrecipes.entities.Ingredient;
 import com.xenon.simplyrecipes.entities.Recipe;
+import com.xenon.simplyrecipes.services.CategoryService;
 import com.xenon.simplyrecipes.services.RecipeManagementService;
 import com.xenon.simplyrecipes.views.MainLayout;
 import com.xenon.simplyrecipes.views.components.IngredientLayout;
+import com.xenon.simplyrecipes.views.components.IngredientUpload;
 import com.xenon.simplyrecipes.views.components.UploadImage;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,50 +35,49 @@ import java.util.List;
  * */
 
 @PageTitle("Add Recipe")
-@Route(value = "", layout = MainLayout.class)
+@Route(value = "/develop", layout = MainLayout.class)
 public class AddRecipeView extends Main {
 
-    private static final int DEFAULT_INGREDIENT_AMOUNT = 0;
-
+    private final CategoryService categoryService;
     private final RecipeManagementService recipeManagementService;
 
-    private final TextField receipeTitle = new TextField("Recipe Title");
-    private final TextArea receipeDescription = new TextArea("Description");
-    private final IntegerField receipeDuration = new IntegerField("Duration");
-
     private final UploadImage uploadImage = new UploadImage();
+    private final TextField recipeTitle = new TextField("Recipe Title");
+    private final TextArea recipeDescription = new TextArea("Description");
+    private final MultiSelectComboBox<Category> categoryMultiselect = new MultiSelectComboBox<>("Categories");
+    private final IntegerField recipePreparingDuration = new IntegerField("Preparing duration");
+    private final IntegerField recipeCookingDuration = new IntegerField("Cooking duration");
+    private final IngredientUpload ingredientUpload = new IngredientUpload();
 
-    private final TextField ingredientName = new TextField("Ingredient name");
-    private final IntegerField ingredientAmount = new IntegerField("Amount");
-    private final Button addIngredientBtn = new Button("Add ingredient");
-
-    private final List<Ingredient> ingredients = new ArrayList<>();
+    private final List<Ingredient> listOfIngredients = new ArrayList<>();
+    private final List<CookingStep> listOfCookingSteps = new ArrayList<>();
 
     @Autowired
-    public AddRecipeView(RecipeManagementService recipeManagementService) {
+    public AddRecipeView(CategoryService categoryService, RecipeManagementService recipeManagementService) {
+        this.categoryService = categoryService;
         this.recipeManagementService = recipeManagementService;
-    }
 
-
-    public void initialize() {
-        VerticalLayout dialogLayout = new VerticalLayout(uploadImage, receipeTitle, receipeDescription, receipeDuration);
-
-        HorizontalLayout layoutForIngredients = new HorizontalLayout(ingredientName, ingredientAmount, addIngredientBtn);
-        layoutForIngredients.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-
-        dialogLayout.add(layoutForIngredients);
-        add(dialogLayout);
-
+        initialize();
         addStyle();
-        add(layoutForIngredients);
     }
 
-    public Recipe getReceipe() {
+    private void initialize() {
+        VerticalLayout recipeFormLayout = new VerticalLayout(uploadImage, recipeTitle, recipeDescription, categoryMultiselect, recipePreparingDuration, recipeCookingDuration);
+        recipeFormLayout.addClassName("recipe-form");
+
+        recipeFormLayout.add(ingredientUpload);
+        add(recipeFormLayout);
+    }
+
+    public Recipe getRecipe() {
         Recipe recipeToBeSaved = new Recipe();
-        recipeToBeSaved.setName(receipeTitle.getValue());
-        recipeToBeSaved.setDescription(receipeDescription.getValue());
-        recipeToBeSaved.setPreparingDuration(receipeDuration.getValue());
-        recipeToBeSaved.setIngredients(null);
+        recipeToBeSaved.setName(recipeTitle.getValue());
+        recipeToBeSaved.setDescription(recipeDescription.getValue());
+        recipeToBeSaved.setCategories(categoryMultiselect.getValue().stream().toList());
+        recipeToBeSaved.setPreparingDuration(recipePreparingDuration.getValue());
+        recipeToBeSaved.setCookingDuration(recipeCookingDuration.getValue());
+        recipeToBeSaved.setIngredients(listOfIngredients);
+        recipeToBeSaved.setCookingSteps(listOfCookingSteps);
         recipeToBeSaved.setComments(null);
 
         recipeToBeSaved.setDateCreated(LocalDate.now());
@@ -81,57 +85,29 @@ public class AddRecipeView extends Main {
         return recipeToBeSaved;
     }
 
-//    private void setupDialog() {
-//        this.setHeaderTitle("Add a new receipe");
-//
-//        Button cancelButton = new Button("Cancel", (e) -> this.close());
-//        cancelButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-//        cancelButton.getStyle().set("margin-right", "auto");
-//        this.getFooter().add(cancelButton);
-//
-//        Button saveButton = new Button("Save", (e) -> this.close());
-//        saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
-//        this.getFooter().add(saveButton);
-//    }
-
     private void addStyle() {
-        receipeTitle.addClassName("dialog-field");
-        receipeDescription.addClassName("dialog-field");
+        recipeTitle.addClassName("dialog-field");
+        recipeDescription.addClassName("dialog-field");
 
-        ingredientName.addClassName("ingredient-name");
-        ingredientName.setHelperText("Example: Eggs");
+        categoryMultiselect.setItems(categoryService.getAllCategories());
+        categoryMultiselect.setItemLabelGenerator(Category::getName);
+        categoryMultiselect.setWidth("300px");
 
-        receipeDuration.setMin(0);
-        receipeDuration.setValue(0);
-        receipeDuration.setStepButtonsVisible(true);
-        receipeDuration.setStep(5);
+        setupDurationFields(recipePreparingDuration);
+        setupDurationFields(recipeCookingDuration);
+    }
+
+    private void setupDurationFields(IntegerField field) {
+        field.setMin(0);
+        field.setValue(0);
+        field.setStepButtonsVisible(true);
+        field.setStep(5);
 
         Paragraph helperText = new Paragraph("Duration in minutes");
         helperText.getStyle().set("display", "inline");
         Div div = new Div(LumoIcon.CLOCK.create(), helperText);
         div.getStyle().set("display", "inline");
-        receipeDuration.setHelperComponent(div);
-
-        ingredientAmount.setMin(DEFAULT_INGREDIENT_AMOUNT);
-        ingredientAmount.setValue(DEFAULT_INGREDIENT_AMOUNT);
-        ingredientAmount.setStepButtonsVisible(true);
-        ingredientAmount.setHelperText("");
-
-        addIngredientBtn.addClassName("add-ingredient-btn");
-        addIngredientBtn.addClickListener(e -> {
-            IngredientLayout ingredientLayoutFromFields = getIngredientLayoutFromFields();
-            add(ingredientLayoutFromFields);
-            clearFields();
-        });
-    }
-
-    private IngredientLayout getIngredientLayoutFromFields() {
-        return new IngredientLayout(ingredientName.getValue(), ingredientAmount.getValue());
-    }
-
-    private void clearFields() {
-        ingredientName.setValue("");
-        ingredientAmount.setValue(DEFAULT_INGREDIENT_AMOUNT);
+        field.setHelperComponent(div);
     }
 
 }

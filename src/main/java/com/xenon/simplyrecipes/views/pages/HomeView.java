@@ -26,8 +26,8 @@ public class HomeView extends Main {
         add(new H2("Welcome to Simply Recipes!"));
         addClassName("container");
 
-        Button addReceipeBtn = new Button("Add Recipe", e -> addRecipeDialog.open());
-        add(addReceipeBtn);
+        Button addRecipe = new Button("Add Recipe", e -> addRecipeDialog.open());
+        add(addRecipe);
 
         Recipe recipe = new Recipe();
         recipe.setName("Pizza");
