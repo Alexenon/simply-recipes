@@ -63,4 +63,20 @@ public class Recipe {
     @Setter
     private LocalDate dateCreated;
 
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", imageName='" + imageName + '\'' +
+                ", preparingDuration=" + preparingDuration +
+                ", cookingDuration=" + cookingDuration +
+                ", categories=" + categories +
+                ", ingredients=" + ingredients +
+                ", cookingSteps=" + cookingSteps +
+                ", comments=" + comments +
+                ", dateCreated=" + dateCreated +
+                '}';
+    }
 }

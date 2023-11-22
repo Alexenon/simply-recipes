@@ -11,7 +11,7 @@ import com.xenon.simplyrecipes.entities.Ingredient;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IngredientUpload extends VerticalLayout {
+public class IngredientUploader extends VerticalLayout {
 
     private static List<Ingredient> ingredientList;
 
@@ -19,7 +19,7 @@ public class IngredientUpload extends VerticalLayout {
     private final IntegerField ingredientAmount = new IntegerField("Amount");
     private final Button addIngredientBtn = new Button("Add ingredient");
 
-    public IngredientUpload() {
+    public IngredientUploader() {
         ingredientList = new ArrayList<>();
         initialize();
         addStyle();
@@ -64,6 +64,5 @@ public class IngredientUpload extends VerticalLayout {
     public List<Ingredient> getIngredientList() {
         return ingredientList;
     }
-
 
 }

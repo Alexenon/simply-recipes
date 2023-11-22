@@ -50,7 +50,3 @@ vaadin-vertical-layout {
     border-radius: 5px;
     box-shadow: 0 1px 5px 1px #eaeaea;
 }
-
-.recipe-input {
-    border: 1px solid rgb(234, 234, 234);
-}
