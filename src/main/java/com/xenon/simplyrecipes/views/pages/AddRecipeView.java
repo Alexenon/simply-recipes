@@ -3,6 +3,7 @@ package com.xenon.simplyrecipes.views.pages;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -13,8 +14,6 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoIcon;
 import com.xenon.simplyrecipes.entities.Category;
-import com.xenon.simplyrecipes.entities.CookingStep;
-import com.xenon.simplyrecipes.entities.Ingredient;
 import com.xenon.simplyrecipes.entities.Recipe;
 import com.xenon.simplyrecipes.services.CategoryService;
 import com.xenon.simplyrecipes.services.RecipeManagementService;
@@ -25,8 +24,6 @@ import com.xenon.simplyrecipes.views.components.UploadImage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /*
  * https://food52.com/recipes/new
@@ -47,11 +44,7 @@ public class AddRecipeView extends Main {
     private final IntegerField recipeCookingDuration = new IntegerField("Cooking duration");
     private final IngredientUploader ingredientUploader = new IngredientUploader();
     private final CookingStepUploader cookingStepUploader = new CookingStepUploader();
-
     private final Button saveRecipeBtn = new Button("Save recipe");
-
-    private final List<Ingredient> listOfIngredients = new ArrayList<>();
-    private final List<CookingStep> listOfCookingSteps = new ArrayList<>();
 
     @Autowired
     public AddRecipeView(CategoryService categoryService, RecipeManagementService recipeManagementService) {
@@ -64,29 +57,23 @@ public class AddRecipeView extends Main {
     }
 
     private void initialize() {
-        VerticalLayout recipeFormLayout = new VerticalLayout(uploadImage, recipeTitle, recipeDescription, categoryMultiselect, recipePreparingDuration, recipeCookingDuration);
+        H2 headerText = new H2("Add a New Recipe");
+        headerText.addClassName("recipe-header");
+
+        VerticalLayout recipeFormLayout = new VerticalLayout(headerText);
         recipeFormLayout.addClassName("recipe-form");
-
-        recipeFormLayout.add(ingredientUploader);
-        recipeFormLayout.add(cookingStepUploader);
-        recipeFormLayout.add(saveRecipeBtn);
+        recipeFormLayout.add(
+                uploadImage,
+                recipeTitle,
+                recipeDescription,
+                categoryMultiselect,
+                recipePreparingDuration,
+                recipeCookingDuration,
+                ingredientUploader,
+                cookingStepUploader,
+                saveRecipeBtn
+        );
         add(recipeFormLayout);
-    }
-
-    public Recipe getRecipe() {
-        Recipe recipeToBeSaved = new Recipe();
-        recipeToBeSaved.setName(recipeTitle.getValue());
-        recipeToBeSaved.setDescription(recipeDescription.getValue());
-//        recipeToBeSaved.setCategories(categoryMultiselect.getValue().stream().toList());
-        recipeToBeSaved.setPreparingDuration(recipePreparingDuration.getValue());
-        recipeToBeSaved.setCookingDuration(recipeCookingDuration.getValue());
-        recipeToBeSaved.setIngredients(listOfIngredients);
-        recipeToBeSaved.setCookingSteps(listOfCookingSteps);
-        recipeToBeSaved.setComments(null);
-
-        recipeToBeSaved.setDateCreated(LocalDate.now());
-
-        return recipeToBeSaved;
     }
 
     private void addStyle() {
@@ -112,6 +99,21 @@ public class AddRecipeView extends Main {
         Div div = new Div(LumoIcon.CLOCK.create(), helperText);
         div.getStyle().set("display", "inline");
         field.setHelperComponent(div);
+    }
+
+    public Recipe getRecipe() {
+        Recipe recipeToBeSaved = new Recipe();
+        recipeToBeSaved.setName(recipeTitle.getValue());
+        recipeToBeSaved.setDescription(recipeDescription.getValue());
+        recipeToBeSaved.setCategories(categoryMultiselect.getValue().stream().toList());
+        recipeToBeSaved.setPreparingDuration(recipePreparingDuration.getValue());
+        recipeToBeSaved.setCookingDuration(recipeCookingDuration.getValue());
+        recipeToBeSaved.setIngredients(ingredientUploader.getIngredientList());
+        recipeToBeSaved.setCookingSteps(cookingStepUploader.getListOfCookingSteps());
+        recipeToBeSaved.setComments(null);
+        recipeToBeSaved.setDateCreated(LocalDate.now());
+
+        return recipeToBeSaved;
     }
 
     private void setupSaveBtn() {

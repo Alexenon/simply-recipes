@@ -42,6 +42,24 @@ vaadin-vertical-layout {
     justify-content: center;
 }
 
+.recipe-header {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.44;
+    text-align: center;
+}
+
+.recipe-header:after {
+    content: " ";
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvBdFxFrLXtivBPK8HdJj8f3dygZEUDMQHVbHrqr34zEncPM9F");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 200px;
+    height: 50px;
+    margin: 7px auto;
+    display: block;
+}
+
 .recipe-form {
     margin: 35px 200px 35px 200px;
     padding: 30px;
