@@ -14,9 +14,7 @@ import com.xenon.simplyrecipes.entities.Recipe;
 public class RecipeCardLayout extends Div {
 
     private static final String FOLDER_LOCATION = "./images/";
-
-    private Recipe recipe;
-
+    private final Recipe recipe;
     H2 title;
     Image image;
     Paragraph description;
@@ -44,7 +42,10 @@ public class RecipeCardLayout extends Div {
         Div imageContainer = new Div(image);
         imageContainer.addClassName("image");
 
-        Div durationDiv = new Div(VaadinIcon.CLOCK.create(), preparingDuration);
+        String text = String.format("Prep : %d min | Cook : %d min",
+                recipe.getPreparingDuration(), recipe.getCookingDuration());
+        Paragraph p = new Paragraph(text);
+        Div durationDiv = new Div(VaadinIcon.CLOCK.create(), p);
         durationDiv.addClassName("duration");
         Div cardFooter = new Div(durationDiv, showBtn);
         cardFooter.addClassName("card-footer");
@@ -58,6 +59,10 @@ public class RecipeCardLayout extends Div {
     private void costumize() {
         showBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
         showBtn.setIconAfterText(true);
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
     }
 
 }

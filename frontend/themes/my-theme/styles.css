@@ -68,3 +68,30 @@ vaadin-vertical-layout {
     border-radius: 5px;
     box-shadow: 0 1px 5px 1px #eaeaea;
 }
+
+
+/*******[ CATEGORIES PAGE ]*******/
+
+.category-wrapper {
+	padding: 5px;
+	max-width: 960px;
+	width: 95%;
+	margin: 20px auto;
+}
+
+.columns {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	margin: 5px 0;
+}
+
+.column {
+	flex: 1;
+	border: 1px solid gray;
+	margin: 30px;
+	padding: 10px;
+	&:first-child { margin-left: 0; }
+	&:last-child { margin-right: 0; }
+
+}

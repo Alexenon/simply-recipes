@@ -28,6 +28,6 @@ public class User {
 
     @Getter
     @Setter
-    private String confirmPassword;
+    private String email;
 
 }

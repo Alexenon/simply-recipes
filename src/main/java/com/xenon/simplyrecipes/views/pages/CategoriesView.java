@@ -1,8 +1,6 @@
 package com.xenon.simplyrecipes.views.pages;
 
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Main;
-import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.xenon.simplyrecipes.entities.Category;
@@ -12,6 +10,10 @@ import com.xenon.simplyrecipes.views.MainLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+
+/*
+ * https://www.youtube.com/watch?v=-8LTPIJBGwQ
+ * */
 
 @PageTitle("Categories")
 @Route(value = "/categories", layout = MainLayout.class)
@@ -28,9 +30,16 @@ public class CategoriesView extends Main {
         this.recipeService = recipeService;
         this.categoryService = categoryService;
 
+        addClassName("category-wrapper");
+
+        Section section = new Section();
+        section.addClassName("columns");
+
         List<Category> listOfCategories;
         listOfCategories = categoryService.getAllCategories();
-        listOfCategories.forEach(c -> add(getCategoryDiv(c)));
+        listOfCategories.forEach(c -> section.add(getCategoryDiv(c)));
+
+        add(section);
     }
 
     private int getCategoryCount(String categoryName) {
@@ -38,12 +47,12 @@ public class CategoriesView extends Main {
     }
 
     private Div getCategoryDiv(Category category) {
-        Paragraph categoryNameParagraph = new Paragraph(category.getName());
-        String categoryCount = String.valueOf(getCategoryCount(category.getName()));
-        Paragraph categoryCountParagraph = new Paragraph(categoryCount);
+        H2 categoryNameParagraph = new H2(category.getName());
+        String countText = String.valueOf(getCategoryCount(category.getName()));
+        Paragraph categoryCountParagraph = new Paragraph(countText + " recipe");
 
         Div categoryDiv = new Div(categoryNameParagraph, categoryCountParagraph);
-        categoryDiv.addClassName("category-container");
+        categoryDiv.addClassName("column");
         return categoryDiv;
     }
 
