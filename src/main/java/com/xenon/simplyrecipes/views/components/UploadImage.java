@@ -8,6 +8,8 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.server.StreamResource;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.*;
 import java.util.logging.Level;
@@ -15,7 +17,14 @@ import java.util.logging.Logger;
 
 public class UploadImage extends Div {
 
+    private static final String FOLDER_PATH = "src/main/resources/META-INF/resources/images/recipes/";
+
+    @Getter
+    @Setter
     private File file;
+
+    @Getter
+    @Setter
     private String originalFileName;
 
     public UploadImage() {
@@ -81,7 +90,7 @@ public class UploadImage extends Div {
     private OutputStream receiveUpload(String originalFileName, String MIMEType) {
         this.originalFileName = originalFileName;
         try {
-            this.file = createTempFile();
+            this.file = createFile();
             return new FileOutputStream(file);
         } catch (IOException e) {
             logError("Failed to create InputStream for: '" + this.file.getAbsolutePath(), e);
@@ -90,10 +99,11 @@ public class UploadImage extends Div {
         return null;
     }
 
-    private File createTempFile() throws IOException {
-        File tempFile = File.createTempFile("prefix-", "-suffix");
-        tempFile.deleteOnExit();
-        return tempFile;
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    private File createFile() throws IOException {
+        File file = new File(FOLDER_PATH + originalFileName);
+        file.createNewFile();
+        return file;
     }
 
     public String getUploadedFilePath() {

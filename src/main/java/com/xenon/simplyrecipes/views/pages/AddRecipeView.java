@@ -6,7 +6,6 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
@@ -60,7 +59,7 @@ public class AddRecipeView extends Main {
         H2 headerText = new H2("Add a New Recipe");
         headerText.addClassName("recipe-header");
 
-        VerticalLayout recipeFormLayout = new VerticalLayout(headerText);
+        Div recipeFormLayout = new Div(headerText);
         recipeFormLayout.addClassName("recipe-form");
         recipeFormLayout.add(
                 uploadImage,

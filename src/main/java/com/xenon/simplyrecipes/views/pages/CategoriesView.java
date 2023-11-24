@@ -37,7 +37,11 @@ public class CategoriesView extends Main {
 
         List<Category> listOfCategories;
         listOfCategories = categoryService.getAllCategories();
-        listOfCategories.forEach(c -> section.add(getCategoryDiv(c)));
+        listOfCategories.forEach(c -> {
+            Div column = new Div(getCategoryDiv(c));
+            column.addClassName("column");
+            section.add(column);
+        });
 
         add(section);
     }
@@ -47,13 +51,15 @@ public class CategoriesView extends Main {
     }
 
     private Div getCategoryDiv(Category category) {
+        Div arrow = new Div();
+        arrow.addClassName("arrow");
         H2 categoryNameParagraph = new H2(category.getName());
         String countText = String.valueOf(getCategoryCount(category.getName()));
         Paragraph categoryCountParagraph = new Paragraph(countText + " recipe");
 
-        Div categoryDiv = new Div(categoryNameParagraph, categoryCountParagraph);
-        categoryDiv.addClassName("column");
-        return categoryDiv;
+        Div categoryCard = new Div(categoryNameParagraph, categoryCountParagraph);
+        categoryCard.addClassName("category-card");
+        return categoryCard;
     }
 
 }
