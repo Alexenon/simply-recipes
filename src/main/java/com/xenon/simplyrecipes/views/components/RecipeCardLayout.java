@@ -1,5 +1,6 @@
 package com.xenon.simplyrecipes.views.components;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
@@ -9,6 +10,7 @@ import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.xenon.simplyrecipes.entities.Recipe;
+import com.xenon.simplyrecipes.views.pages.RecipeDetailsView;
 
 //https://codepen.io/FairyWsr/details/RwvpzaE
 public class RecipeCardLayout extends Div {
@@ -24,6 +26,7 @@ public class RecipeCardLayout extends Div {
 
     public RecipeCardLayout(Recipe recipe) {
         this.recipe = recipe;
+
         title = new H2(recipe.getName());
         image = new Image();
         image.setSrc(FOLDER_LOCATION + recipe.getImageName());
@@ -59,6 +62,7 @@ public class RecipeCardLayout extends Div {
     private void costumize() {
         showBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
         showBtn.setIconAfterText(true);
+        showBtn.addClickListener(e -> UI.getCurrent().navigate(RecipeDetailsView.class));
     }
 
     public Recipe getRecipe() {

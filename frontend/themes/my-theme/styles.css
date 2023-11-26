@@ -154,3 +154,29 @@ vaadin-vertical-layout {
     color: #f1f1f1;
     transition: all 0.3s ease;
 }
+
+
+/**************[ DETAILS PAGE ]**************/
+
+.details-layout {
+    background: #f7f7f7;
+    width: calc(100% + 32px);
+    margin: 25px 0 0 -16px;
+    padding: 0 16px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 14px;
+    text-align: center;
+    line-height: normal;
+}
+
+.details-layout li {
+    width: 50%;
+    min-height: 80px;
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+}
+
