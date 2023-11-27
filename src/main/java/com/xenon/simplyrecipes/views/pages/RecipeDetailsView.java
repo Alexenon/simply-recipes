@@ -1,9 +1,12 @@
 package com.xenon.simplyrecipes.views.pages;
 
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.router.BeforeEvent;
+import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.xenon.simplyrecipes.entities.Recipe;
+import com.xenon.simplyrecipes.services.RecipeService;
 import com.xenon.simplyrecipes.views.MainLayout;
 import com.xenon.simplyrecipes.views.components.basic.HR;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +17,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("Recipe Details")
 @Route(value = "recipe-details", layout = MainLayout.class)
-public class RecipeDetailsView extends Main {
+public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
 
     private static final String FOLDER_LOCATION = "./images/";
 
     @Autowired
-    private final Recipe recipe;
+    private RecipeService recipeService;
 
-    public RecipeDetailsView(Recipe recipe) {
-        this.recipe = recipe;
+    private Recipe recipe;
+
+    @Override
+    public void setParameter(BeforeEvent event, Long recipeId) {
+        recipe = recipeService.getRecipeById(recipeId)
+                .orElseThrow(() -> new RuntimeException("Recipe not found"));
 
         initialize();
-        costumize();
+        customize();
     }
 
     private void initialize() {
@@ -36,7 +43,7 @@ public class RecipeDetailsView extends Main {
         );
     }
 
-    private void costumize() {
+    private void customize() {
 
     }
 

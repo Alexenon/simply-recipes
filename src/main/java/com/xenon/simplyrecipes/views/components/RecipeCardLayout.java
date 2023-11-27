@@ -62,7 +62,11 @@ public class RecipeCardLayout extends Div {
     private void costumize() {
         showBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
         showBtn.setIconAfterText(true);
-        showBtn.addClickListener(e -> UI.getCurrent().navigate(RecipeDetailsView.class));
+        showBtn.addClickListener(e -> {
+//            Long recipeId = recipe.getId();
+            Long recipeId = 1L;
+            UI.getCurrent().navigate(RecipeDetailsView.class, recipeId);
+        });
     }
 
     public Recipe getRecipe() {

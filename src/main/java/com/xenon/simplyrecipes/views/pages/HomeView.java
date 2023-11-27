@@ -6,15 +6,12 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.xenon.simplyrecipes.entities.Category;
 import com.xenon.simplyrecipes.entities.Recipe;
 import com.xenon.simplyrecipes.views.MainLayout;
 import com.xenon.simplyrecipes.views.components.AddRecipeDialog;
 import com.xenon.simplyrecipes.views.components.RecipeCardLayout;
-import org.hibernate.mapping.List;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 @PageTitle("Home")
 @Route(value = "", layout = MainLayout.class)
