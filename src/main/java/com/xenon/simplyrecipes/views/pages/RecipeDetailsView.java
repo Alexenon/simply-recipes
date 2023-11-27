@@ -32,20 +32,25 @@ public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
                 .orElseThrow(() -> new RuntimeException("Recipe not found"));
 
         initialize();
-        customize();
     }
 
     private void initialize() {
-        add(
+        Div content = new Div();
+        addClassName("recipe-details");
+        content.add(
+                getHeader(),
                 getImage(),
                 getInformationSection(),
                 getIngredientSection(),
                 getCookingStepSection()
         );
+        add(content);
     }
 
-    private void customize() {
-
+    private H2 getHeader() {
+        H2 header = new H2(recipe.getName());
+        header.addClassName("recipe-header");
+        return header;
     }
 
     private Image getImage() {

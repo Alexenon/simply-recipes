@@ -1,15 +1,17 @@
 /**************[ DETAILS PAGE ]**************/
 
 .recipe-details {
-    background: #f7f7f7;
-    width: calc(100% + 32px);
-    margin: 25px 0 0 -16px;
-    padding: 0 16px;
     display: flex;
-    flex-wrap: wrap;
-    font-size: 14px;
-    text-align: center;
-    line-height: normal;
+    align-items: center;
+    margin: 30px 100px 0 100px;
+}
+
+.recipe-details > div {
+    width: 100%;
+}
+
+.recipe-details h3 {
+    margin-top: 40px;
 }
 
 .details-layout {
@@ -18,15 +20,14 @@
     margin: 25px 0 0 -16px;
     padding: 0 16px;
     display: flex;
-    /*flex-wrap: wrap;*/
-    font-size: 14px;
+    align-items: center;
+    font-size: 13px;
     text-align: center;
     line-height: normal;
 }
 
 .details-layout li {
     width: 50%;
-    /*min-height: 80px;*/
     padding: 20px 12px;
     display: flex;
     flex-direction: column;
@@ -37,7 +38,7 @@
 .details-layout li span {
     margin-bottom: 9px;
     color: #2d4558;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
 }

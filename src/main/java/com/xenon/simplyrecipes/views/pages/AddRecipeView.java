@@ -56,10 +56,10 @@ public class AddRecipeView extends Main {
     }
 
     private void initialize() {
-        H2 headerText = new H2("Add a New Recipe");
-        headerText.addClassName("recipe-header");
+        H2 header = new H2("Add a New Recipe");
+        header.addClassName("recipe-header");
 
-        Div recipeFormLayout = new Div(headerText);
+        Div recipeFormLayout = new Div(header);
         recipeFormLayout.addClassName("recipe-form");
         recipeFormLayout.add(
                 uploadImage,
