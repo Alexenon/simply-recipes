@@ -1,0 +1,78 @@
+/**************[ DETAILS PAGE ]**************/
+
+.recipe-details {
+    background: #f7f7f7;
+    width: calc(100% + 32px);
+    margin: 25px 0 0 -16px;
+    padding: 0 16px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 14px;
+    text-align: center;
+    line-height: normal;
+}
+
+.details-layout {
+    background: #f7f7f7;
+    width: calc(100% + 32px);
+    margin: 25px 0 0 -16px;
+    padding: 0 16px;
+    display: flex;
+    /*flex-wrap: wrap;*/
+    font-size: 14px;
+    text-align: center;
+    line-height: normal;
+}
+
+.details-layout li {
+    width: 50%;
+    /*min-height: 80px;*/
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+}
+
+.details-layout li span {
+    margin-bottom: 9px;
+    color: #2d4558;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.details-layout li:after {
+    content: ' ';
+    background: #eaeaea;
+    width: 1px;
+    position: absolute;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+}
+
+/* Ingredient Section */
+
+.ingredients-layout ul{
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.53;
+}
+
+.ingredients-layout li {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.ingredients-layout li span {
+    font-weight: normal;
+    margin-bottom: 15px;
+    margin-right: 5px;
+}
+
+/* Cooking Steps Section */
+
+.cooking-steps-layout ol {
+    counter-reset: steps;
+}

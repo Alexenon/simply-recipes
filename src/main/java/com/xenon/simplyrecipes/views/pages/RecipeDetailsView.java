@@ -38,8 +38,9 @@ public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
     private void initialize() {
         add(
                 getImage(),
-                getDetailSection(),
-                getIngredientSection()
+                getInformationSection(),
+                getIngredientSection(),
+                getCookingStepSection()
         );
     }
 
@@ -54,39 +55,54 @@ public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
         return new Image();
     }
 
-    private UnorderedList getDetailSection() {
+    private UnorderedList getInformationSection() {
         UnorderedList detailsLayout = new UnorderedList();
         detailsLayout.addClassName("details-layout");
 
+        String mins = " minutes";
         detailsLayout.add(
-                getDetailsLayout("PREP TIME", recipe.getPreparingDuration().toString()),
-                getDetailsLayout("COOK TIME", recipe.getCookingDuration().toString())
+                getListItem("PREP TIME", recipe.getPreparingDuration().toString() + mins),
+                getListItem("COOK TIME", recipe.getCookingDuration().toString() + mins)
         );
 
         return detailsLayout;
     }
 
-    private ListItem getDetailsLayout(String title, String info) {
-        ListItem layout = new ListItem(new Span(title));
-        layout.setText(info + " minutes");
-        return layout;
-    }
-
     private Div getIngredientSection() {
         Div ingredientsLayout = new Div(new H3("Ingredients"), new HR());
+        ingredientsLayout.addClassName("ingredients-layout");
 
         UnorderedList ul = new UnorderedList();
-        recipe.getIngredients().forEach(ingredient -> {
-            Paragraph name = new Paragraph(ingredient.getName() + " - ");
-            Paragraph amount = new Paragraph(String.valueOf(ingredient.getAmount()));
-            amount.getStyle().set("font-weight", "bold");
 
-            ul.add(new ListItem(name, amount));
+        recipe.getIngredients().forEach(ingredient -> {
+            String amount = String.valueOf(ingredient.getAmount());
+            ListItem listItem = getListItem(ingredient.getName(), amount);
+            ul.add(listItem);
         });
 
         ingredientsLayout.add(ul);
 
         return ingredientsLayout;
+    }
+
+    private Div getCookingStepSection() {
+        Div layout = new Div(new H3("Cooking Steps"), new HR());
+        layout.addClassName("cooking-steps-layout");
+
+        OrderedList ol = new OrderedList();
+        recipe.getCookingSteps().forEach(step -> {
+            ListItem listItem = getListItem("", step.getStep());
+            ol.add(listItem);
+        });
+
+        layout.add(ol);
+        return layout;
+    }
+
+    private ListItem getListItem(String title, String info) {
+        ListItem prepTimeLi = new ListItem(info);
+        prepTimeLi.addComponentAsFirst(new Span(title));
+        return prepTimeLi;
     }
 
 }
