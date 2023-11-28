@@ -46,18 +46,15 @@
 .card .content{
     position: absolute;
     width: 100%;
-    /*padding: 0 30px;*/
     text-align: center;
     top: 235px;
-    height: 40px;
     overflow: hidden;
     transition: 0.5s;
-     border: 2px solid red;
+    /*border: 2px solid red;*/
 }
 
 .card:hover .content{
     top: 120px;
-    height: 100px;
 }
 
 .card .content h2{
@@ -66,21 +63,14 @@
     font-weight: 900;
 }
 
-.card .content p{
+.card .content p {
     color: #333;
+    display: none;
     font-size: 1.05em;
 }
 
-.card .content a{
-    /*position: relative;*/
-    top: 15px;
+.card:hover .content p {
     display: inline-block;
-    padding: 12px 25px;
-    background-color: #33d;
-    color: #ffff;
-    font-weight: 500;
-    text-decoration: none;
-    border-radius: 8px;
 }
 
 .card .card-footer {
