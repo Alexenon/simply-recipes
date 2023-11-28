@@ -13,7 +13,7 @@
 }
 
 .card:hover{
-    height: 350px;
+    height: 300px;
     margin-top: 65px;
 }
 
@@ -46,18 +46,18 @@
 .card .content{
     position: absolute;
     width: 100%;
-    padding: 0 30px;
+    /*padding: 0 30px;*/
     text-align: center;
     top: 235px;
     height: 40px;
     overflow: hidden;
     transition: 0.5s;
-    /* border: 2px solid red; */
+     border: 2px solid red;
 }
 
 .card:hover .content{
     top: 120px;
-    height: 250px;
+    height: 100px;
 }
 
 .card .content h2{
@@ -72,7 +72,7 @@
 }
 
 .card .content a{
-    position: relative;
+    /*position: relative;*/
     top: 15px;
     display: inline-block;
     padding: 12px 25px;
@@ -90,8 +90,8 @@
 .card:hover .card-footer {
     display: flex;
     position: relative;
-    top: 300px;
-    width: 300px;
+    top: 240px;
+    width: 330px;
     justify-content: space-between;
 }
 
@@ -101,6 +101,6 @@
 }
 
 .card .duration vaadin-icon {
-    font-size: 9px;
-    margin: 0 5px 2px 0;
+    font-size: 10px;
+    margin: 0 5px 3px 0;
 }
