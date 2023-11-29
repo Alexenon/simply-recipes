@@ -1,5 +1,6 @@
 package com.xenon.simplyrecipes.views.pages;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -59,6 +60,10 @@ public class CategoriesView extends Main {
 
         Div categoryCard = new Div(categoryNameParagraph, categoryCountParagraph);
         categoryCard.addClassName("category-card");
+        categoryCard.addClickListener(e -> {
+            String categoryName = category.getName();
+            UI.getCurrent().navigate(RecipesView.class, categoryName);
+        });
         return categoryCard;
     }
 

@@ -66,6 +66,7 @@
 .card .content p {
     color: #333;
     display: none;
+    margin: 0 20px;
     font-size: 1.05em;
 }
 
@@ -92,5 +93,5 @@
 
 .card .duration vaadin-icon {
     font-size: 10px;
-    margin: 0 5px 3px 0;
+    margin: 0 10px 3px 0;
 }
