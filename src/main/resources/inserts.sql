@@ -6,14 +6,19 @@ INSERT INTO Categories (name) VALUES
     ('Dinner');
 
 -- Inserting new recipes
-INSERT INTO Recipes (name, description, image_name, preparing_duration, cooking_duration, date_created)
+INSERT INTO Recipes (id, name, description, image_name, preparing_duration, cooking_duration, date_created)
 VALUES
-    ('Salad Caesar', 'Salad with Caesar dressing', 'salad-caesar.jpg', 20, 50, CURDATE()),
-    ('Pasta Carbonara', 'Classic Italian pasta dish with eggs, cheese, and pancetta', 'pasta-carbonara.jpg', 15, 20, CURDATE()),
-    ('Grilled Salmon', 'Delicious grilled salmon with a lemon and herb marinade', 'grilled-salmon.jpg', 10, 15, CURDATE()),
-    ('Beef Tacos', 'Delicious and flavorful beef tacos with fresh salsa and guacamole', 'beef-tacos.jpg', 20, 30, CURDATE()),
-    ('Mushroom Risotto', 'Creamy and savory mushroom risotto with Arborio rice and Parmesan cheese', 'mushroom-risotto.jpg', 25, 35, CURDATE()),
-    ('Chicken Alfredo', 'Creamy pasta dish with grilled chicken and Parmesan cheese', 'chicken-alfredo.jpg', 20, 30, CURDATE());
+    (1, 'Salad Caesar', 'Salad with Caesar dressing', 'salad-caesar.jpg', 20, 50, CURDATE()),
+    (2, 'Pasta Carbonara', 'Classic Italian pasta dish with eggs, cheese, and pancetta', 'pasta-carbonara.jpg', 15, 20, CURDATE()),
+    (3, 'Grilled Salmon', 'Delicious grilled salmon with a lemon and herb marinade', 'grilled-salmon.jpg', 10, 15, CURDATE()),
+    (4, 'Beef Tacos', 'Delicious and flavorful beef tacos with fresh salsa and guacamole', 'beef-tacos.jpg', 20, 30, CURDATE()),
+    (5, 'Mushroom Risotto', 'Creamy and savory mushroom risotto with Arborio rice and Parmesan cheese', 'mushroom-risotto.jpg', 25, 35, CURDATE()),
+    (6, 'Chicken Alfredo', 'Creamy pasta dish with grilled chicken and Parmesan cheese', 'chicken-alfredo.jpg', 20, 30, CURDATE());
+    (7, 'French Toast', 'Classic breakfast dish made with bread soaked in eggs and milk, then fried', 'french-toast.jpg', 10, 15, CURDATE()),
+    (8, 'Chicken Stir-Fry', 'Quick and flavorful stir-fry with chicken, vegetables, and a savory sauce', 'chicken-stir-fry.jpg', 15, 20, CURDATE()),
+    (9, 'Vegetable Curry', 'Hearty and aromatic curry with a variety of vegetables and spices', 'vegetable-curry.jpg', 20, 30, CURDATE()),
+    (10, 'Beef Stroganoff', 'Comforting beef dish cooked with onions, mushrooms, and sour cream, served over noodles', 'beef-stroganoff.jpg', 20, 25, CURDATE()),
+    (11, 'Lemon Garlic Shrimp', 'Tender shrimp cooked in a zesty lemon and garlic sauce, perfect for a quick and light dinner', 'lemon-garlic-shrimp.jpg', 10, 15, CURDATE());
 
 -- Inserting ingredients for the new recipes
 INSERT INTO Ingredients (name, amount, recipe_id)
@@ -47,7 +52,27 @@ VALUES
     ('Heavy cream', '1 cup', 6),
     ('Butter', '2 tbsp', 6),
     ('Garlic, minced', '3 cloves', 6),
-    ('Parmesan cheese', '1 cup', 6);
+    ('Parmesan cheese', '1 cup', 6),
+    ('Bread slices', 4, 7),
+    ('Eggs', 3, 7),
+    ('Milk', 0.5, 7),
+    ('Chicken breast, sliced', 500, 8),
+    ('Bell peppers, sliced', 2, 8),
+    ('Broccoli florets', 1, 8),
+    ('Soy sauce', 2, 8),
+    ('Vegetable oil', 2, 8),
+    ('Mixed vegetables (carrots, potatoes, peas, etc.)', 2, 9),
+    ('Coconut milk', 1, 9),
+    ('Curry powder', 1, 9),
+    ('Beef sirloin, thinly sliced', 600, 10),
+    ('Onion, sliced', 1, 10),
+    ('Mushrooms, sliced', 200, 10),
+    ('Sour cream', 0.5, 10),
+    ('Egg noodles', 8, 10),
+    ('Shrimp, peeled and deveined', 500, 11),
+    ('Garlic, minced', 4, 11),
+    ('Lemon juice', 2, 11),
+    ('Butter', 3, 11);
 
 -- Inserting cooking steps for the new recipes
 INSERT INTO cooking_steps (step, recipe_id)
@@ -75,7 +100,25 @@ VALUES
     ('In a pan, melt butter and sauté garlic until fragrant', 6),
     ('Pour in the heavy cream and simmer until slightly thickened', 6),
     ('Stir in the Parmesan cheese until melted and the sauce is smooth', 6),
-    ('Toss the cooked pasta in the sauce until well coated', 6);
+    ('Toss the cooked pasta in the sauce until well coated', 6),
+    ('Soak the bread slices in the egg and milk mixture', 7),
+    ('Fry the soaked bread slices until golden brown', 7),
+    ('Stir-fry the chicken slices in hot oil until cooked through', 8),
+    ('Add the vegetables and soy sauce, stir-fry until tender-crisp', 8),
+    ('Combine and serve with rice', 8),
+    ('Sauté the mixed vegetables in oil until slightly softened', 9),
+    ('Stir in the curry powder and cook for a minute', 9),
+    ('Pour in the coconut milk and simmer until the vegetables are tender', 9),
+    ('Serve hot with rice or bread', 9),
+    ('Cook the beef slices in a hot pan until browned', 10),
+    ('Add the onion and mushrooms, cook until softened', 10),
+    ('Stir in the sour cream and heat through, season with salt and pepper', 10),
+    ('Cook the egg noodles according to package instructions', 10),
+    ('Serve the beef stroganoff over the cooked noodles', 10),
+    ('Melt butter in a skillet over medium heat', 11),
+    ('Add the minced garlic and cook until fragrant', 11),
+    ('Add the shrimp and cook until pink and opaque', 11),
+    ('Stir in the lemon juice and cook for another minute', 11);
 
 -- Associating the new recipes with categories
 INSERT INTO recipe_category(recipe_id, category_id)
@@ -86,7 +129,10 @@ VALUES
     (3, 3),  -- Grilled Salmon is categorized as Dinner
     (4, 4),  -- Beef Tacos is categorized as Dinner
     (5, 4),  -- Mushroom Risotto is categorized as Dinner
-    (6, 3);  -- Chicken Alfredo is categorized as Dinner
-
-
+    (6, 3),  -- Chicken Alfredo is categorized as Dinner
+    (7, 1),  -- French Toast is categorized as Breakfast
+    (8, 2),  -- Chicken Stir-Fry is categorized as Lunch
+    (9, 3),  -- Vegetable Curry is categorized as Dinner
+    (10, 3),  -- Beef Stroganoff is categorized as Dinner
+    (11, 3);  -- Lemon Garlic Shrimp is categorized as Dinner
 
