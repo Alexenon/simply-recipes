@@ -92,21 +92,7 @@ vaadin-vertical-layout {
 	border: 1px solid gray;
 	margin: 30px;
 	padding: 10px;
-	&:first-child { margin-left: 0; }
-	&:last-child { margin-right: 0; }
-}
-
-.arrow {
-    display: flex;
-    justify-content: flex-end;
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: #fff;
-    margin-top: 5px;
-    margin-right: 8px;
-    z-index: 1;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .category-card {
@@ -114,14 +100,15 @@ vaadin-vertical-layout {
     overflow: hidden;
     background: #fff;
     display: flex;
+    width: 220px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     padding: 1rem .5rem;
     box-shadow: 0 1px 1px rgb(0,0,0,0.1),
-    0 2px 2px rgb(0,0,0,0.1),
-    0 4px 4px rgb(0,0,0,0.1),
-    0 8px 8px rgb(0,0,0,0.1);
+        0 2px 2px rgb(0,0,0,0.1),
+        0 4px 4px rgb(0,0,0,0.1),
+        0 8px 8px rgb(0,0,0,0.1);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -160,3 +147,15 @@ vaadin-vertical-layout {
     transition: all 0.3s ease;
 }
 
+.arrow {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+    margin-top: 5px;
+    margin-right: 8px;
+    z-index: 1;
+    cursor: pointer;
+}

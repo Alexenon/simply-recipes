@@ -40,6 +40,7 @@ public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
         content.add(
                 getHeader(),
                 getImage(),
+                getDescription(),
                 getInformationSection(),
                 getIngredientSection(),
                 getCookingStepSection()
@@ -53,11 +54,19 @@ public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
         return header;
     }
 
+    private Div getDescription() {
+        Paragraph description = new Paragraph(recipe.getDescription());
+        Div container = new Div(description);
+        container.addClassName("container");
+        return container;
+    }
+
     private Image getImage() {
         Image image = new Image();
         image.setSrc(FOLDER_LOCATION + recipe.getImageName());
         image.setAlt(recipe.getImageName());
-        return new Image();
+        image.addClassName("recipe-image");
+        return image;
     }
 
     private UnorderedList getInformationSection() {

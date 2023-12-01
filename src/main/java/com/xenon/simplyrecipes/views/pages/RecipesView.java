@@ -23,7 +23,7 @@ public class RecipesView extends Main implements HasUrlParameter<String> {
     @Autowired
     private CategoryService categoryService;
 
-    private List<Recipe> listOfRecipes;
+    private String categoryName;
 
     public RecipesView(RecipeService recipeService, CategoryService categoryService) {
         this.recipeService = recipeService;
@@ -34,9 +34,7 @@ public class RecipesView extends Main implements HasUrlParameter<String> {
 
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String categoryName) {
-        listOfRecipes = categoryName == null || categoryName.isEmpty()
-                ? recipeService.getAllRecipes()
-                : recipeService.getRecipesByCategory(categoryName);
+        this.categoryName = categoryName;
 
         initialize();
     }
@@ -45,12 +43,27 @@ public class RecipesView extends Main implements HasUrlParameter<String> {
         Div pageContent = new Div();
         pageContent.addClassName("page-content");
 
-        listOfRecipes.forEach(recipe -> pageContent.add(new RecipeCardLayout(recipe)));
+        getListOfRecipes().forEach(recipe -> pageContent.add(new RecipeCardLayout(recipe)));
 
         add(
-                new H2("Welcome to Simply Recipes!"),
+                getPageTitle(),
                 pageContent
         );
+    }
+
+    private H2 getPageTitle() {
+        String titleText = categoryName == null || categoryName.isEmpty()
+                ? "Recipes"
+                : categoryName + " Recipes";
+        H2 title = new H2(titleText);
+        title.addClassName("recipe-header");
+        return title;
+    }
+
+    private List<Recipe> getListOfRecipes() {
+        return categoryName == null || categoryName.isEmpty()
+                ? recipeService.getAllRecipes()
+                : recipeService.getRecipesByCategory(categoryName);
     }
 
 

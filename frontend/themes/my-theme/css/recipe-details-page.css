@@ -53,6 +53,15 @@
     bottom: 10px;
 }
 
+.recipe-image {
+    width: 600px;
+    height: 400px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 /* Ingredient Section */
 
 .ingredients-layout ul{

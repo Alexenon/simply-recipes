@@ -3,7 +3,10 @@ USE RecipeBookDB;
 INSERT INTO Categories (name) VALUES
     ('Breakfast'),
     ('Lunch'),
-    ('Dinner');
+    ('Dinner'),
+    ('Appetizers'),
+    ('Desserts'),
+    ('Healthy Choices');
 
 -- Inserting new recipes
 INSERT INTO Recipes (id, name, description, image_name, preparing_duration, cooking_duration, date_created)
@@ -135,4 +138,63 @@ VALUES
     (9, 3),  -- Vegetable Curry is categorized as Dinner
     (10, 3),  -- Beef Stroganoff is categorized as Dinner
     (11, 3);  -- Lemon Garlic Shrimp is categorized as Dinner
+
+
+
+
+
+
+INSERT INTO Ingredients (name, amount, recipe_id)
+VALUES
+    ('Chocolate', 8, 12),
+    ('Butter', 4, 12),
+    ('Eggs', 2, 12),
+    ('Sugar', 4, 12),
+    ('Flour', 2, 12),
+    ('Bell Peppers', 4, 13),
+    ('Quinoa', 1, 13),
+    ('Black Beans', 1, 13),
+    ('Corn', 1, 13),
+    ('Tofu', 1, 14),
+    ('Water Chestnuts', 0.5, 14),
+    ('Lettuce Leaves', 6, 14),
+    ('Mangoes', 2, 15),
+    ('Avocados', 2, 15),
+    ('Red Onion', 0.5, 15),
+    ('Cilantro', 0.25, 15),
+    ('Lime Juice', 2, 15),
+    ('Greek Yogurt', 1, 16),
+    ('Fresh Berries', 1, 16),
+    ('Granola', 0.5, 16),
+    ('Honey', 2, 16);
+
+
+-- Adding cooking steps for the new recipes
+INSERT INTO cooking_steps (step, recipe_id)
+VALUES
+    ('Preheat the oven to 375°F', 12),
+    ('Grease the ramekins with butter and dust with cocoa powder', 12),
+    ('Melt the chocolate and butter together', 12),
+    ('Whisk the eggs and sugar until light and fluffy', 12),
+    ('Fold in the melted chocolate mixture and then the flour', 12),
+    ('Pour the batter into the prepared ramekins and bake for 12-14 minutes', 12),
+    ('Cut the tops off the bell peppers and remove the seeds and membranes', 13),
+    ('Cook the quinoa according to package instructions', 13),
+    ('Mix the cooked quinoa with black beans, corn, and spices', 13),
+    ('Stuff the bell peppers with the quinoa mixture', 13),
+    ('Crumble the tofu and stir-fry with water chestnuts and vegetables', 14),
+    ('Wash and dry the lettuce leaves', 14),
+    ('Spoon the tofu mixture onto the lettuce leaves and serve', 14),
+    ('Prepare the mangoes, avocados, red onion, and cilantro', 15),
+    ('Combine all the ingredients in a bowl and toss with lime juice', 15),
+    ('Layer Greek yogurt, berries, and granola in a glass, drizzle with honey', 16);
+
+-- Associating the new recipes with categories
+INSERT INTO recipe_category(recipe_id, category_id)
+VALUES
+    (12, 3),  -- Chocolate Lava Cake is categorized as Dinner
+    (13, 3),  -- Quinoa Stuffed Bell Peppers is categorized as Dinner
+    (14, 2),  -- Tofu Lettuce Wraps is categorized as Lunch
+    (15, 1),  -- Mango Avocado Salsa is categorized as Appetizers
+    (16, 2);  -- Greek Yogurt Parfait is categorized as Lunch
 
