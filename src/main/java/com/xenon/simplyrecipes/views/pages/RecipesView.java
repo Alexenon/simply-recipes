@@ -40,15 +40,12 @@ public class RecipesView extends Main implements HasUrlParameter<String> {
     }
 
     private void initialize() {
-        Div pageContent = new Div();
-        pageContent.addClassName("page-content");
+        Div pageContent = new Div(getPageTitle());
+        pageContent.addClassName("pageK-content");
 
         getListOfRecipes().forEach(recipe -> pageContent.add(new RecipeCardLayout(recipe)));
 
-        add(
-                getPageTitle(),
-                pageContent
-        );
+        add(pageContent);
     }
 
     private H2 getPageTitle() {

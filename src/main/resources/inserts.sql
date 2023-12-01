@@ -1,4 +1,4 @@
-USE RecipeBookDB;
+USE recipebookdb;
 
 INSERT INTO Categories (name) VALUES
     ('Breakfast'),
@@ -16,12 +16,17 @@ VALUES
     (3, 'Grilled Salmon', 'Delicious grilled salmon with a lemon and herb marinade', 'grilled-salmon.jpg', 10, 15, CURDATE()),
     (4, 'Beef Tacos', 'Delicious and flavorful beef tacos with fresh salsa and guacamole', 'beef-tacos.jpg', 20, 30, CURDATE()),
     (5, 'Mushroom Risotto', 'Creamy and savory mushroom risotto with Arborio rice and Parmesan cheese', 'mushroom-risotto.jpg', 25, 35, CURDATE()),
-    (6, 'Chicken Alfredo', 'Creamy pasta dish with grilled chicken and Parmesan cheese', 'chicken-alfredo.jpg', 20, 30, CURDATE());
+    (6, 'Chicken Alfredo', 'Creamy pasta dish with grilled chicken and Parmesan cheese', 'chicken-alfredo.jpg', 20, 30, CURDATE()),
     (7, 'French Toast', 'Classic breakfast dish made with bread soaked in eggs and milk, then fried', 'french-toast.jpg', 10, 15, CURDATE()),
     (8, 'Chicken Stir-Fry', 'Quick and flavorful stir-fry with chicken, vegetables, and a savory sauce', 'chicken-stir-fry.jpg', 15, 20, CURDATE()),
     (9, 'Vegetable Curry', 'Hearty and aromatic curry with a variety of vegetables and spices', 'vegetable-curry.jpg', 20, 30, CURDATE()),
     (10, 'Beef Stroganoff', 'Comforting beef dish cooked with onions, mushrooms, and sour cream, served over noodles', 'beef-stroganoff.jpg', 20, 25, CURDATE()),
-    (11, 'Lemon Garlic Shrimp', 'Tender shrimp cooked in a zesty lemon and garlic sauce, perfect for a quick and light dinner', 'lemon-garlic-shrimp.jpg', 10, 15, CURDATE());
+    (11, 'Lemon Garlic Shrimp', 'Tender shrimp cooked in a zesty lemon and garlic sauce, perfect for a quick and light dinner', 'lemon-garlic-shrimp.jpg', 10, 15, CURDATE()),
+    (12, 'Chocolate Lava Cake', 'Indulgent chocolate cake with a gooey, molten center, perfect for chocolate lovers', 'chocolate-lava-cake.jpg', 15, 20, CURDATE()),
+    (13, 'Classic Cheesecake', 'Rich and creamy cheesecake with a buttery graham cracker crust, a timeless dessert favorite', 'classic-cheesecake.jpg', 30, 60, CURDATE()),
+    (14, 'Blueberry Pancakes', 'Fluffy pancakes filled with juicy blueberries, a delightful breakfast treat', 'blueberry-pancakes.jpg', 15, 20, CURDATE()),
+    (15, 'Avocado Toast', 'A simple and healthy breakfast option featuring creamy avocado on toasted bread', 'avocado-toast.jpg', 10, 10, CURDATE());
+
 
 -- Inserting ingredients for the new recipes
 INSERT INTO Ingredients (name, amount, recipe_id)
@@ -34,28 +39,28 @@ VALUES
     ('Eggs', 2, 2),
     ('Pancetta', 100, 2),
     ('Parmesan cheese', 50, 2),
-    ('Black pepper', 'to taste', 2),
+    ('Black pepper', 3, 2),
     ('Salmon fillets', 4, 3),
     ('Lemon', 1, 3),
-    ('Fresh herbs', 'to taste', 3),
-    ('Beef sirloin, diced', 500, 4),
-    ('Taco seasoning', '2 tbsp', 4),
+    ('Fresh herbs', 2, 3),
+    ('Beef sirloin', 500, 4),
+    ('Taco seasoning', 2, 4),
     ('Tomatoes, diced', 2, 4),
     ('Onion, chopped', 1, 4),
-    ('Lettuce, shredded', '1 cup', 4),
+    ('Lettuce, shredded', 1, 4),
     ('Tortillas', 8, 4),
     ('Mushrooms, sliced', 300, 5),
     ('Arborio rice', 1, 5),
-    ('Vegetable broth', '4 cups', 5),
-    ('White wine', '1/2 cup', 5),
+    ('Vegetable broth', 4, 5),
+    ('White wine', 1, 5),
     ('Onion, finely chopped', 1, 5),
-    ('Garlic, minced', '3 cloves', 5),
-    ('Parmesan cheese', '1/2 cup', 5),
+    ('Garlic, minced', 3, 5),
+    ('Parmesan cheese', 2, 5),
     ('Chicken breast', 2, 6),
-    ('Heavy cream', '1 cup', 6),
-    ('Butter', '2 tbsp', 6),
-    ('Garlic, minced', '3 cloves', 6),
-    ('Parmesan cheese', '1 cup', 6),
+    ('Heavy cream', 1, 6),
+    ('Butter', 2, 6),
+    ('Garlic, minced', 3, 6),
+    ('Parmesan cheese', 1, 6),
     ('Bread slices', 4, 7),
     ('Eggs', 3, 7),
     ('Milk', 0.5, 7),
@@ -64,7 +69,9 @@ VALUES
     ('Broccoli florets', 1, 8),
     ('Soy sauce', 2, 8),
     ('Vegetable oil', 2, 8),
-    ('Mixed vegetables (carrots, potatoes, peas, etc.)', 2, 9),
+    ('Carrots', 2, 9),
+    ('Potatoes', 4, 9),
+    ('Peas', 150, 9),
     ('Coconut milk', 1, 9),
     ('Curry powder', 1, 9),
     ('Beef sirloin, thinly sliced', 600, 10),
@@ -75,7 +82,28 @@ VALUES
     ('Shrimp, peeled and deveined', 500, 11),
     ('Garlic, minced', 4, 11),
     ('Lemon juice', 2, 11),
-    ('Butter', 3, 11);
+    ('Butter', 3, 11),
+    ('Chocolate', 8, 12),
+    ('Butter', 4, 12),
+    ('Eggs', 2, 12),
+    ('Sugar', 1.5, 12),
+    ('Flour', 1, 12),
+    ('Vanilla extract', 1, 12),
+    ('Cocoa powder', 2, 12),
+    ('Cream cheese', 16, 13),
+    ('Sugar', 1.5, 13),
+    ('Sour cream', 1, 13),
+    ('Eggs', 3, 13),
+    ('Vanilla extract', 1, 13),
+    ('Graham cracker crumbs', 1.5, 13),
+    ('Blueberries', 1, 14),
+    ('Pancake mix', 1, 14),
+    ('Milk', 1, 14),
+    ('Eggs', 2, 14),
+    ('Avocado', 1, 15),
+    ('Bread slices', 2, 15),
+    ('Lemon juice', 1, 15),
+    ('Salt', 1, 15);
 
 -- Inserting cooking steps for the new recipes
 INSERT INTO cooking_steps (step, recipe_id)
@@ -121,80 +149,43 @@ VALUES
     ('Melt butter in a skillet over medium heat', 11),
     ('Add the minced garlic and cook until fragrant', 11),
     ('Add the shrimp and cook until pink and opaque', 11),
-    ('Stir in the lemon juice and cook for another minute', 11);
+    ('Stir in the lemon juice and cook for another minute', 11),
+    ('Preheat the oven to 425°F', 12),
+    ('Butter the ramekins and dust with cocoa powder', 12),
+    ('Melt the chocolate and butter in a bowl over simmering water', 12),
+    ('Whisk the eggs, sugar, and vanilla extract in a bowl', 12),
+    ('Fold in the melted chocolate mixture and then the flour', 12),
+    ('Pour the batter into the prepared ramekins and bake for 12 minutes', 12),
+    ('Mix the cream cheese and sugar until smooth', 13),
+    ('Add the sour cream, eggs, and vanilla extract, mix until combined', 13),
+    ('Pour the mixture over the graham cracker crust and bake for 60 minutes', 13),
+    ('Mix pancake mix, milk, and eggs in a bowl', 14),
+    ('Gently fold in the blueberries', 14),
+    ('Pour the batter onto a hot griddle and cook until golden brown on both sides', 14),
+    ('Mash the avocado with lemon juice and salt', 15),
+    ('Spread the mashed avocado on toasted bread slices', 15);
 
 -- Associating the new recipes with categories
 INSERT INTO recipe_category(recipe_id, category_id)
 VALUES
     (1, 1),  -- Salad Caesar is categorized as Breakfast
     (1, 2),  -- Salad Caesar is categorized as Lunch
+	(1, 4),  -- Salad Caesar is categorized as Appetizers
     (2, 3),  -- Pasta Carbonara is categorized as Dinner
     (3, 3),  -- Grilled Salmon is categorized as Dinner
     (4, 4),  -- Beef Tacos is categorized as Dinner
-    (5, 4),  -- Mushroom Risotto is categorized as Dinner
+    (5, 3),  -- Mushroom Risotto is categorized as Dinner
+    (5, 4),  -- Mushroom Risotto is categorized as Appetizers
+    (5, 6),  -- Mushroom Risotto is categorized as Healthy
     (6, 3),  -- Chicken Alfredo is categorized as Dinner
     (7, 1),  -- French Toast is categorized as Breakfast
     (8, 2),  -- Chicken Stir-Fry is categorized as Lunch
     (9, 3),  -- Vegetable Curry is categorized as Dinner
+    (9, 6),  -- Vegetable Curry is categorized as Healthy
     (10, 3),  -- Beef Stroganoff is categorized as Dinner
-    (11, 3);  -- Lemon Garlic Shrimp is categorized as Dinner
-
-
-
-
-
-
-INSERT INTO Ingredients (name, amount, recipe_id)
-VALUES
-    ('Chocolate', 8, 12),
-    ('Butter', 4, 12),
-    ('Eggs', 2, 12),
-    ('Sugar', 4, 12),
-    ('Flour', 2, 12),
-    ('Bell Peppers', 4, 13),
-    ('Quinoa', 1, 13),
-    ('Black Beans', 1, 13),
-    ('Corn', 1, 13),
-    ('Tofu', 1, 14),
-    ('Water Chestnuts', 0.5, 14),
-    ('Lettuce Leaves', 6, 14),
-    ('Mangoes', 2, 15),
-    ('Avocados', 2, 15),
-    ('Red Onion', 0.5, 15),
-    ('Cilantro', 0.25, 15),
-    ('Lime Juice', 2, 15),
-    ('Greek Yogurt', 1, 16),
-    ('Fresh Berries', 1, 16),
-    ('Granola', 0.5, 16),
-    ('Honey', 2, 16);
-
-
--- Adding cooking steps for the new recipes
-INSERT INTO cooking_steps (step, recipe_id)
-VALUES
-    ('Preheat the oven to 375°F', 12),
-    ('Grease the ramekins with butter and dust with cocoa powder', 12),
-    ('Melt the chocolate and butter together', 12),
-    ('Whisk the eggs and sugar until light and fluffy', 12),
-    ('Fold in the melted chocolate mixture and then the flour', 12),
-    ('Pour the batter into the prepared ramekins and bake for 12-14 minutes', 12),
-    ('Cut the tops off the bell peppers and remove the seeds and membranes', 13),
-    ('Cook the quinoa according to package instructions', 13),
-    ('Mix the cooked quinoa with black beans, corn, and spices', 13),
-    ('Stuff the bell peppers with the quinoa mixture', 13),
-    ('Crumble the tofu and stir-fry with water chestnuts and vegetables', 14),
-    ('Wash and dry the lettuce leaves', 14),
-    ('Spoon the tofu mixture onto the lettuce leaves and serve', 14),
-    ('Prepare the mangoes, avocados, red onion, and cilantro', 15),
-    ('Combine all the ingredients in a bowl and toss with lime juice', 15),
-    ('Layer Greek yogurt, berries, and granola in a glass, drizzle with honey', 16);
-
--- Associating the new recipes with categories
-INSERT INTO recipe_category(recipe_id, category_id)
-VALUES
-    (12, 3),  -- Chocolate Lava Cake is categorized as Dinner
-    (13, 3),  -- Quinoa Stuffed Bell Peppers is categorized as Dinner
-    (14, 2),  -- Tofu Lettuce Wraps is categorized as Lunch
-    (15, 1),  -- Mango Avocado Salsa is categorized as Appetizers
-    (16, 2);  -- Greek Yogurt Parfait is categorized as Lunch
-
+    (11, 3),  -- Lemon Garlic Shrimp is categorized as Dinner
+    (11, 4),  -- Lemon Garlic Shrimp is categorized as Appetizers
+    (12, 5), -- Chocolate Lava Cake is categorized as Desserts
+    (13, 5), -- Classic Cheesecake is categorized as Desserts
+    (14, 1), -- Blueberry Pancakes is categorized as Breakfast
+    (15, 1); -- Avocado Toast is categorized as Breakfast
