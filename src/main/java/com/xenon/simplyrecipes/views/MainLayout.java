@@ -1,21 +1,28 @@
 package com.xenon.simplyrecipes.views;
 
 import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.component.html.Paragraph;
-import com.xenon.simplyrecipes.views.pages.AddRecipeView;
-import com.xenon.simplyrecipes.views.pages.CategoriesView;
+import com.vaadin.flow.component.html.Header;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.xenon.simplyrecipes.views.components.NavigationBar;
 
 public class MainLayout extends AppLayout {
 
     public MainLayout() {
-        super();
+        addToNavbar(getHeader());
+    }
 
-        Paragraph addRecipe = new Paragraph("Add Recipe");
-        addRecipe.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate(AddRecipeView.class)));
+    private Header getHeader() {
+        Header header = new Header();
+        header.setId("header");
 
-        Paragraph categories = new Paragraph("Categories");
-        categories.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate(CategoriesView.class)));
+        Icon personIcon = new Icon(VaadinIcon.USER);
+        personIcon.addClassName("user-icon");
 
-        addToNavbar(addRecipe, categories);
+        NavigationBar navbar = new NavigationBar();
+        navbar.add(personIcon);
+        header.add(navbar);
+
+        return header;
     }
 }

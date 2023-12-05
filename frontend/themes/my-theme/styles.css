@@ -1,8 +1,19 @@
 @import "theme-editor.css";
-@import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=Playball&family=Poppins:wght@200;300;500;700;800;900&display=swap');
 
 @import 'css/card.css';
+@import 'css/header.css';
 @import 'css/recipe-details-page.css';
+
+:root {
+    --header-background: rgb(255, 255, 255);
+    --color-white: white;
+    --color-black: rgb(51, 40, 40);
+    --color-gray: rgb(123, 123, 123);
+}
+
+.page-content {
+    margin-top: 80px;
+}
 
 ul {
     list-style-type: none;
@@ -22,10 +33,6 @@ vaadin-vertical-layout {
     padding: 0;
 }
 
-/*.dialog-field {
-    width: 100%;
-}*/
-
 .ingredient-name,
 .add-ingredient-btn {
     margin-top: 16px;
@@ -35,13 +42,12 @@ vaadin-vertical-layout {
     width: 100%;
 }
 
-/******************[ ADD RECIPE PAGE ]*******************/
-
-.page-content {
+.page-content,
+.recipe-wrapper {
     display: flex;
     flex-wrap: wrap;
-    padding: 30px;
     justify-content: center;
+    margin: 30px;
 }
 
 .recipe-header {
@@ -62,6 +68,8 @@ vaadin-vertical-layout {
     display: block;
 }
 
+/******************[ ADD RECIPE PAGE ]*******************/
+
 .recipe-form {
     margin: 35px 200px 35px 200px;
     padding: 30px;
@@ -77,7 +85,7 @@ vaadin-vertical-layout {
 	padding: 5px;
 	max-width: 960px;
 	width: 95%;
-	margin: 20px auto;
+	margin: 40px auto;
 }
 
 .columns {

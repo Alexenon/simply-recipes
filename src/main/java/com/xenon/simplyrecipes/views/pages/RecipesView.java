@@ -29,7 +29,7 @@ public class RecipesView extends Main implements HasUrlParameter<String> {
         this.recipeService = recipeService;
         this.categoryService = categoryService;
 
-        addClassName("container");
+        addClassName("page-content");
     }
 
     @Override
@@ -40,10 +40,12 @@ public class RecipesView extends Main implements HasUrlParameter<String> {
     }
 
     private void initialize() {
-        Div pageContent = new Div(getPageTitle());
-        pageContent.addClassName("pageK-content");
+        Div wrapper = new Div();
+        wrapper.addClassName("recipe-wrapper");
+        getListOfRecipes().forEach(recipe -> wrapper.add(new RecipeCardLayout(recipe)));
 
-        getListOfRecipes().forEach(recipe -> pageContent.add(new RecipeCardLayout(recipe)));
+        Div pageContent = new Div(getPageTitle(), wrapper);
+//        pageContent.addClassName("page-content");
 
         add(pageContent);
     }
