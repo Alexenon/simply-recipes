@@ -28,26 +28,22 @@ public class RecipesView extends Main implements HasUrlParameter<String> {
     public RecipesView(RecipeService recipeService, CategoryService categoryService) {
         this.recipeService = recipeService;
         this.categoryService = categoryService;
-
-        addClassName("page-content");
     }
 
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String categoryName) {
         this.categoryName = categoryName;
-
         initialize();
     }
 
     private void initialize() {
+        addClassName("page-content");
+
         Div wrapper = new Div();
         wrapper.addClassName("recipe-wrapper");
         getListOfRecipes().forEach(recipe -> wrapper.add(new RecipeCardLayout(recipe)));
 
-        Div pageContent = new Div(getPageTitle(), wrapper);
-//        pageContent.addClassName("page-content");
-
-        add(pageContent);
+        add(getPageTitle(), wrapper);
     }
 
     private H2 getPageTitle() {
