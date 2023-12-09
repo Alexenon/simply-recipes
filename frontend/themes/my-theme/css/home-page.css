@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Rochester');
+
+main {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.container-fluid {
+  padding: 3em 3em;
+  font-family: 'Josefin Sans', sans-serif;
+  overflow: hidden;
+}
+
+#home {
+  background-color: #fff;
+  font-size: 45px;
+}
+
+#contact {
+  background-color: #fff;
+  font-size: 2.4em;
+  vertical-align: middle !important;
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 1.7em;
+  text-align: center;
+}
+
+h4 {
+  font-weight: 500;
+  font-size: 3em;
+}
+
+.heart {
+  font-family: 'Rochester', sans-serif;
+  font-size: 50px;
+  color: #b39970;
+}
+
+.catch {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: 1.7em;
+
+}
+
+.catch li {
+    display: inline-block;
+    margin: 20px 10px;
+}
+
+.catch a {
+    text-decoration: none;
+    color: inherit;
+    padding-top: 72px;
+    outline: none !important;
+}
+
+.catch a:hover {
+    color: #F5DA81;;
+    -webkit-transform: scale(1.3, 1.3);
+    transform: scale(1.3, 1.3);
+}
+

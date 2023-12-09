@@ -1,7 +1,7 @@
-@import "theme-editor.css";
-
 @import 'css/card.css';
 @import 'css/header.css';
+@import 'css/categories-page.css';
+@import 'css/add-recipe-page.css';
 @import 'css/recipe-details-page.css';
 
 :root {
@@ -29,7 +29,8 @@ vaadin-button {
 
 vaadin-text-area,
 vaadin-text-field,
-vaadin-vertical-layout {
+vaadin-vertical-layout,
+vaadin-multi-select-combo-box {
     padding: 0;
 }
 
@@ -65,104 +66,4 @@ vaadin-vertical-layout {
     height: 50px;
     margin: 7px auto;
     display: block;
-}
-
-/******************[ ADD RECIPE PAGE ]*******************/
-
-.recipe-form {
-    margin: 35px 200px 35px 200px;
-    padding: 30px;
-    width: 1000px;
-    /*border: 1px solid black;*/
-    border-radius: 5px;
-    box-shadow: 0 1px 5px 1px #eaeaea;
-}
-
-/*******[ CATEGORIES PAGE ]*******/
-
-.category-wrapper {
-	padding: 5px;
-	max-width: 960px;
-	width: 95%;
-	margin: 40px auto;
-}
-
-.columns {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: center;
-	margin: 5px 0;
-}
-
-.column {
-	flex: 1;
-	border: 1px solid gray;
-	margin: 30px;
-	padding: 10px;
-	cursor: pointer;
-}
-
-.category-card {
-    position: relative;
-    overflow: hidden;
-    background: #fff;
-    display: flex;
-    width: 220px;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 1rem .5rem;
-    box-shadow: 0 1px 1px rgb(0,0,0,0.1),
-        0 2px 2px rgb(0,0,0,0.1),
-        0 4px 4px rgb(0,0,0,0.1),
-        0 8px 8px rgb(0,0,0,0.1);
-    transition: transform 0.3s ease-in-out;
-}
-
-.category-card:hover {
-    transform: scale(1.05);
-}
-
-.category-card:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    background: #FF0038;
-    clip-path:
-    polygon(0 0, 100% 0, 100% 100%);
-    transition:
-    width 0.3s ease, height 0.3s ease;
-    z-index: 0;
-}
-
-.category-card:hover:before {
-    width: 200%;
-    height: 200%;
-    z-index: -1;
-}
-
-.category-card:hover h2 {
-    color: #fff;
-    transition: all 0.3s ease;
-}
-
-.category-card:hover p {
-    color: #f1f1f1;
-    transition: all 0.3s ease;
-}
-
-.arrow {
-    display: flex;
-    justify-content: flex-end;
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: #fff;
-    margin-top: 5px;
-    margin-right: 8px;
-    z-index: 1;
-    cursor: pointer;
 }

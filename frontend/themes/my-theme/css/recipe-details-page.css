@@ -3,7 +3,7 @@
 .recipe-details {
     display: flex;
     align-items: center;
-    margin: 30px 100px 0 100px;
+    margin: 50px 100px;
 }
 
 .recipe-details > div {

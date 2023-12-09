@@ -1,67 +1,52 @@
 package com.xenon.simplyrecipes.views.pages;
 
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.Html;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.xenon.simplyrecipes.entities.Recipe;
-import com.xenon.simplyrecipes.services.RecipeService;
 import com.xenon.simplyrecipes.views.MainLayout;
-import com.xenon.simplyrecipes.views.components.AddRecipeDialog;
-import com.xenon.simplyrecipes.views.components.RecipeCardLayout;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.time.LocalDate;
 
 @PageTitle("Home")
 @Route(value = "", layout = MainLayout.class)
+@CssImport("./themes/my-theme/css/home-page.css")
 public class HomeView extends Main {
 
-    AddRecipeDialog addRecipeDialog = new AddRecipeDialog();
-    @Autowired
-    private RecipeService recipeService;
-
-    public HomeView(RecipeService recipeService) {
-        this.recipeService = recipeService;
-
-        add(new H2("Welcome to Simply Recipes!"));
-        addClassName("container");
-
-        Button addRecipe = new Button("Add Recipe", e -> addRecipeDialog.open());
-        add(addRecipe);
-
-        Div pageContent = new Div();
-        pageContent.addClassName("page-content");
-
-        recipeService.getAllRecipes().forEach(recipe -> pageContent.add(new RecipeCardLayout(recipe)));
-
-        add(pageContent);
+    public HomeView() {
+        add(
+                getHomeSection()
+//                getContactSection()
+        );
     }
 
+    private Html getHomeSection() {
+        return new Html("""
+                    <section id="home" class="container-fluid text-center">
+                      <h1>
+                        Home <br><small>is where the <span class="heart"> <br>heart </span> <br> is. </small>
+                      </h1>
+                    </section>
 
-    private void initialize(Div pageContent) {
-        Recipe recipe = new Recipe();
-        recipe.setName("Pizza");
-        recipe.setDescription("Pepperoni is a variety of spicy salami made from cured pork and beef seasoned with paprika or other chili pepper. Prior to cooking, pepperoni is characteristically soft, slightly smoky, and bright red.");
-        recipe.setPreparingDuration(10);
-        recipe.setCookingDuration(300);
-        recipe.setImageName("pizza.jpg");
-        recipe.setComments(null);
-
-        recipe.setCategories(null);
-        recipe.setCookingSteps(null);
-        recipe.setDateCreated(LocalDate.now());
-
-        pageContent.add(new RecipeCardLayout(recipe));
-        pageContent.add(new RecipeCardLayout(recipe));
-        pageContent.add(new RecipeCardLayout(recipe));
-        pageContent.add(new RecipeCardLayout(recipe));
-        pageContent.add(new RecipeCardLayout(recipe));
-        pageContent.add(new RecipeCardLayout(recipe));
-        pageContent.add(new RecipeCardLayout(recipe));
-        pageContent.add(new RecipeCardLayout(recipe));
-        pageContent.add(new RecipeCardLayout(recipe));
+                """);
     }
+
+    private Html getContactSection() {
+        return new Html("""
+                <section id="contact" class="container-fluid text-center">
+                   <h1>Catch me <small><br><span class="heart"> if you can... </span> </small></h1>
+                     <ul class="catch">
+                       <li>s
+                         <a class="fa fa-code" href="https://www.sololearn.com/Profile/2251477" target="_blank"></a>
+                       </li> s
+                       <li>
+                         <a class="fa fa-fire" href="https://www.freecodecamp.org/" target="_blank"></a>
+                       </li>
+                       <li>
+                         <a class="fa fa-codepen" href="https://codepen.io/" target="_blank"></a>
+                       </li>
+                     </ul>
+                 </section>
+                 """);
+    }
+
 }
