@@ -7,6 +7,10 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.xenon.simplyrecipes.views.MainLayout;
 
+/*
+https://codepen.io/__dd__/pen/ZJyGEV
+*/
+
 @PageTitle("Home")
 @Route(value = "", layout = MainLayout.class)
 @CssImport("./themes/my-theme/css/home-page.css")
@@ -22,11 +26,11 @@ public class HomeView extends Main {
     private Html getHomeSection() {
         return new Html("""
                     <section id="home" class="container-fluid text-center">
-                      <h1>
-                        Home <br><small>is where the <span class="heart"> <br>heart </span> <br> is. </small>
-                      </h1>
+                        <h1>Home</h1>
+                        <small class="title-element">is where the</small>
+                        <span class="heart title-element">heart</span>
+                        <small class="title-element"> is. </small>
                     </section>
-
                 """);
     }
 

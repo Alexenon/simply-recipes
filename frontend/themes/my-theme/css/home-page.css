@@ -1,15 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Rochester');
 
-main {
-  margin: 0;
-  width: 100%;
-  height: 100%;
-}
-
 .container-fluid {
   padding: 3em 3em;
   font-family: 'Josefin Sans', sans-serif;
   overflow: hidden;
+}
+
+.title-element {
+    display: block;
 }
 
 #home {
@@ -45,7 +43,6 @@ h4 {
     margin: 0;
     list-style: none;
     font-size: 1.7em;
-
 }
 
 .catch li {

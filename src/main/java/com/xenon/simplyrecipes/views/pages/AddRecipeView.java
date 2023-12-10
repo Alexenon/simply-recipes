@@ -1,11 +1,14 @@
 package com.xenon.simplyrecipes.views.pages;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
@@ -70,7 +73,7 @@ public class AddRecipeView extends Main {
                 recipeCookingDuration,
                 ingredientUploader,
                 cookingStepUploader,
-                saveRecipeBtn
+                getFooter()
         );
         add(recipeFormLayout);
     }
@@ -79,9 +82,16 @@ public class AddRecipeView extends Main {
         recipeTitle.addClassName("dialog-field");
         recipeDescription.addClassName("dialog-field");
 
+        recipeDescription.setHeight("100px");
+        recipeCookingDuration.setWidth("300px");
+        recipePreparingDuration.setWidth("300px");
+
         categoryMultiselect.setItems(categoryService.getAllCategories());
         categoryMultiselect.setItemLabelGenerator(Category::getName);
         categoryMultiselect.setWidth("300px");
+
+        saveRecipeBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
+        saveRecipeBtn.setWidth("150px");
 
         setupDurationFields(recipePreparingDuration);
         setupDurationFields(recipeCookingDuration);
@@ -121,6 +131,14 @@ public class AddRecipeView extends Main {
             System.out.println(recipe);
             recipeManagementService.saveRecipe(recipe);
         });
+    }
+
+    private HorizontalLayout getFooter() {
+        HorizontalLayout footer = new HorizontalLayout(saveRecipeBtn);
+        footer.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
+        footer.getStyle().set("margin-top", "20px");
+
+        return footer;
     }
 
 }
