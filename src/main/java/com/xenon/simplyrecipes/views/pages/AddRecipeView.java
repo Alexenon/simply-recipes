@@ -1,5 +1,6 @@
 package com.xenon.simplyrecipes.views.pages;
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
@@ -26,6 +27,7 @@ import com.xenon.simplyrecipes.views.components.UploadImage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /*
  * https://food52.com/recipes/new
@@ -64,17 +66,9 @@ public class AddRecipeView extends Main {
 
         Div recipeFormLayout = new Div(header);
         recipeFormLayout.addClassName("recipe-form");
-        recipeFormLayout.add(
-                uploadImage,
-                recipeTitle,
-                recipeDescription,
-                categoryMultiselect,
-                recipePreparingDuration,
-                recipeCookingDuration,
-                ingredientUploader,
-                cookingStepUploader,
-                getFooter()
-        );
+        recipeFormLayout.add(getFormFields().toArray(Component[]::new));
+        recipeFormLayout.add(getFooter());
+
         add(recipeFormLayout);
     }
 
@@ -95,6 +89,7 @@ public class AddRecipeView extends Main {
 
         setupDurationFields(recipePreparingDuration);
         setupDurationFields(recipeCookingDuration);
+        getFormFields().forEach(component -> component.addClassName("form-field"));
     }
 
     private void setupDurationFields(IntegerField field) {
@@ -139,6 +134,19 @@ public class AddRecipeView extends Main {
         footer.getStyle().set("margin-top", "20px");
 
         return footer;
+    }
+
+    private List<Component> getFormFields() {
+        return List.of(
+                uploadImage,
+                recipeTitle,
+                recipeDescription,
+                categoryMultiselect,
+                recipePreparingDuration,
+                recipeCookingDuration,
+                ingredientUploader,
+                cookingStepUploader
+        );
     }
 
 }
