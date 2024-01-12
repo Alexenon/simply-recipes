@@ -6,8 +6,11 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.xenon.simplyrecipes.entities.Recipe;
+import com.xenon.simplyrecipes.services.CommentService;
 import com.xenon.simplyrecipes.services.RecipeService;
+import com.xenon.simplyrecipes.services.UserService;
 import com.xenon.simplyrecipes.views.MainLayout;
+import com.xenon.simplyrecipes.views.components.CommentSection;
 import com.xenon.simplyrecipes.views.components.basic.HR;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,6 +26,10 @@ public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
 
     @Autowired
     private RecipeService recipeService;
+    @Autowired
+    private CommentService commentService;
+    @Autowired
+    private UserService userService;
 
     private Recipe recipe;
 
@@ -32,6 +39,7 @@ public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
                 .orElseThrow(() -> new RuntimeException("Recipe not found"));
 
         initialize();
+        getElement().executeJs("window.scrollTo(0,0)"); // Scroll to top of the page, on initialization
     }
 
     private void initialize() {
@@ -43,10 +51,10 @@ public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
                 getDescription(),
                 getInformationSection(),
                 getIngredientSection(),
-                getCookingStepSection()
+                getCookingStepSection(),
+                getCommentSection()
         );
         add(content);
-        getElement().executeJs("window.scrollTo(0,0)"); // Scroll to top of the page, on initialization
     }
 
     private H2 getHeader() {
@@ -118,6 +126,12 @@ public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
         ListItem prepTimeLi = new ListItem(info);
         prepTimeLi.addComponentAsFirst(new Span(title));
         return prepTimeLi;
+    }
+
+    private CommentSection getCommentSection() {
+        CommentSection commentSection = new CommentSection(recipe, commentService, userService);
+        commentSection.addClassName("comment-section");
+        return commentSection;
     }
 
 }
