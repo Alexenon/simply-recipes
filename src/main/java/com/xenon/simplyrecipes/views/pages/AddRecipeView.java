@@ -40,7 +40,7 @@ public class AddRecipeView extends Main {
     private final CategoryService categoryService;
     private final RecipeManagementService recipeManagementService;
 
-    private final UploadImage uploadImage = new UploadImage();
+    private final UploadImage imageUploader = new UploadImage();
     private final TextField recipeTitle = new TextField("Recipe Title");
     private final TextArea recipeDescription = new TextArea("Description");
     private final MultiSelectComboBox<Category> categoryMultiselect = new MultiSelectComboBox<>("Categories");
@@ -57,7 +57,6 @@ public class AddRecipeView extends Main {
 
         initialize();
         addStyle();
-        setupSaveBtn();
     }
 
     private void initialize() {
@@ -89,6 +88,7 @@ public class AddRecipeView extends Main {
 
         setupDurationFields(recipePreparingDuration);
         setupDurationFields(recipeCookingDuration);
+        setupSaveBtn();
         getFormFields().forEach(component -> component.addClassName("form-field"));
     }
 
@@ -138,7 +138,7 @@ public class AddRecipeView extends Main {
 
     private List<Component> getFormFields() {
         return List.of(
-                uploadImage,
+                imageUploader,
                 recipeTitle,
                 recipeDescription,
                 categoryMultiselect,
