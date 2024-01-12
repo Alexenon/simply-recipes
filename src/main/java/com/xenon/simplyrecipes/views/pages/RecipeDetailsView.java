@@ -46,6 +46,7 @@ public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
                 getCookingStepSection()
         );
         add(content);
+        getElement().executeJs("window.scrollTo(0,0)"); // Scroll to top of the page, on initialization
     }
 
     private H2 getHeader() {

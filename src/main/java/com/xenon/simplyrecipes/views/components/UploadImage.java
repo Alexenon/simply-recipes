@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 public class UploadImage extends Div {
 
-    private static final String FOLDER_PATH = "src/main/resources/META-INF/resources/images/recipes/";
+    private static final String FOLDER_PATH = "src/main/resources/META-INF/resources/images/";
 
     @Getter
     @Setter

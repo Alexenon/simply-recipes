@@ -13,8 +13,20 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
+    public List<Comment> getComments() {
+        return commentRepository.findAll();
+    }
+
+    public Comment addComment(Comment comment) {
+        return commentRepository.save(comment);
+    }
+
     public List<Comment> addComments(List<Comment> comments) {
         return commentRepository.saveAll(comments);
+    }
+
+    public List<Comment> getCommentsByRecipeId(Long recipeId) {
+        return commentRepository.findByRecipeId(recipeId);
     }
 
 }
