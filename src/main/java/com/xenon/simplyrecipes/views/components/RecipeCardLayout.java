@@ -17,12 +17,11 @@ public class RecipeCardLayout extends Div {
 
     private static final String FOLDER_LOCATION = "./images/";
     private final Recipe recipe;
-    H2 title;
-    Image image;
-    Paragraph description;
-    Paragraph preparingDuration = new Paragraph();
-    Paragraph cookingDuration = new Paragraph();
-    Button showBtn = new Button("Show", new Icon(VaadinIcon.ARROW_RIGHT));
+
+    private final H2 title;
+    private final Image image;
+    private final Paragraph description;
+    private final Button showBtn = new Button("Show", new Icon(VaadinIcon.ARROW_RIGHT));
 
     public RecipeCardLayout(Recipe recipe) {
         this.recipe = recipe;
@@ -32,8 +31,7 @@ public class RecipeCardLayout extends Div {
         image.setSrc(FOLDER_LOCATION + recipe.getImageName());
         image.setAlt(recipe.getImageName());
         description = new Paragraph(recipe.getDescription());
-        preparingDuration.setText(recipe.getPreparingDuration().toString() + " mins");
-        cookingDuration.setText(recipe.getCookingDuration().toString() + " mins");
+
 
         initialize();
         costumize();
@@ -47,9 +45,9 @@ public class RecipeCardLayout extends Div {
 
         String text = String.format("Prep : %d min | Cook : %d min",
                 recipe.getPreparingDuration(), recipe.getCookingDuration());
-        Paragraph p = new Paragraph(text);
-        Div durationDiv = new Div(VaadinIcon.CLOCK.create(), p);
+        Div durationDiv = new Div(VaadinIcon.CLOCK.create(), new Paragraph(text));
         durationDiv.addClassName("duration");
+
         Div cardFooter = new Div(durationDiv, showBtn);
         cardFooter.addClassName("card-footer");
 
@@ -60,17 +58,17 @@ public class RecipeCardLayout extends Div {
     }
 
     private void costumize() {
+        Paragraph preparingDuration = new Paragraph();
+        preparingDuration.setText(recipe.getPreparingDuration().toString() + " mins");
+        Paragraph cookingDuration = new Paragraph();
+        cookingDuration.setText(recipe.getCookingDuration().toString() + " mins");
+
         showBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
         showBtn.setIconAfterText(true);
         showBtn.addClickListener(e -> {
             Long recipeId = recipe.getId();
-//            Long recipeId = 1L;
             UI.getCurrent().navigate(RecipeDetailsView.class, recipeId);
         });
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
     }
 
 }

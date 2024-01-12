@@ -41,13 +41,11 @@ public class CommentSection extends Section {
         chatLayout.add(input, comments);
         updateCommentsForRecipe();
         setupAddCommentListener();
+        add(chatLayout);
     }
 
     private void addStyle() {
-        chatLayout.setHeight("500px");
-        chatLayout.setWidth("400px");
         chatLayout.expand(comments);
-        add(chatLayout);
     }
 
     private void updateCommentsForRecipe() {
@@ -77,6 +75,5 @@ public class CommentSection extends Section {
             updateCommentsForRecipe();
         });
     }
-
 
 }
