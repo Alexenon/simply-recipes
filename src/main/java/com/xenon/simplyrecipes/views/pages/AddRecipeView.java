@@ -1,6 +1,7 @@
 package com.xenon.simplyrecipes.views.pages;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
@@ -8,11 +9,14 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoIcon;
@@ -27,6 +31,7 @@ import com.xenon.simplyrecipes.views.components.UploadImage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 
 /*
@@ -40,11 +45,13 @@ public class AddRecipeView extends Main {
     private final CategoryService categoryService;
     private final RecipeManagementService recipeManagementService;
 
+    private final Binder<Recipe> binder = new Binder<>(Recipe.class);
+
     private final UploadImage imageUploader = new UploadImage();
     private final TextField recipeTitle = new TextField("Recipe Title");
     private final TextArea recipeDescription = new TextArea("Description");
     private final MultiSelectComboBox<Category> categoryMultiselect = new MultiSelectComboBox<>("Categories");
-    private final IntegerField recipePreparingDuration = new IntegerField("Preparing duration");
+    private final IntegerField recipePreparingDuration = new IntegerField("Preparation time");
     private final IntegerField recipeCookingDuration = new IntegerField("Cooking duration");
     private final IngredientUploader ingredientUploader = new IngredientUploader();
     private final CookingStepUploader cookingStepUploader = new CookingStepUploader();
@@ -57,6 +64,7 @@ public class AddRecipeView extends Main {
 
         initialize();
         addStyle();
+        initBinder();
     }
 
     private void initialize() {
@@ -109,7 +117,7 @@ public class AddRecipeView extends Main {
         Recipe recipeToBeSaved = new Recipe();
         recipeToBeSaved.setName(recipeTitle.getValue());
         recipeToBeSaved.setDescription(recipeDescription.getValue());
-        recipeToBeSaved.setCategories(categoryMultiselect.getValue().stream().toList());
+        recipeToBeSaved.setCategories(new HashSet<>(categoryMultiselect.getValue()));
         recipeToBeSaved.setPreparingDuration(recipePreparingDuration.getValue());
         recipeToBeSaved.setCookingDuration(recipeCookingDuration.getValue());
         recipeToBeSaved.setIngredients(ingredientUploader.getIngredientList());
@@ -122,9 +130,15 @@ public class AddRecipeView extends Main {
 
     private void setupSaveBtn() {
         saveRecipeBtn.addClickListener(e -> {
+            if (!binder.isValid()) {
+                binder.validate();
+                showErrorNotification();
+                return;
+            }
+
             Recipe recipe = getRecipe();
-            System.out.println(recipe);
             recipeManagementService.saveRecipe(recipe);
+            UI.getCurrent().navigate(RecipeDetailsView.class, recipe.getId());
         });
     }
 
@@ -132,7 +146,6 @@ public class AddRecipeView extends Main {
         HorizontalLayout footer = new HorizontalLayout(saveRecipeBtn);
         footer.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
         footer.getStyle().set("margin-top", "20px");
-
         return footer;
     }
 
@@ -147,6 +160,32 @@ public class AddRecipeView extends Main {
                 ingredientUploader,
                 cookingStepUploader
         );
+    }
+
+    private void initBinder() {
+        binder.forField(recipeTitle)
+                .asRequired("Please fill this field")
+                .withValidator(s -> s.length() >= 4, "Name must contain at least 4 characters")
+                .withValidator(s -> s.length() <= 30, "Name must contain less or equal to 30 characters")
+                .bind(Recipe::getName, Recipe::setName);
+
+        binder.forField(categoryMultiselect)
+                .asRequired("Please select at least one category")
+                .withValidator(list -> list.size() <= 5, "Please select up to 5 categories")
+                .bind(Recipe::getCategories, Recipe::setCategories);
+
+        binder.forField(recipeCookingDuration)
+                .asRequired("Please fill this field")
+                .withValidator(duration -> duration > 0, "Cooking duration must be greater than 0")
+                .bind(Recipe::getCookingDuration, Recipe::setCookingDuration);
+    }
+
+    private void showErrorNotification() {
+        Notification notification = Notification.show("An error occured while submiting form");
+        notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+        notification.setPosition(Notification.Position.TOP_CENTER);
+        notification.setDuration(5000);
+        notification.open();
     }
 
 }

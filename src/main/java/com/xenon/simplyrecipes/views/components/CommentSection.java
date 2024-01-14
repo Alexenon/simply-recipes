@@ -1,5 +1,8 @@
 package com.xenon.simplyrecipes.views.components;
 
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Section;
 import com.vaadin.flow.component.messages.MessageInput;
 import com.vaadin.flow.component.messages.MessageList;
@@ -41,19 +44,27 @@ public class CommentSection extends Section {
         updateCommentsForRecipe();
         setupAddCommentListener();
         chatLayout.add(input, comments);
-        add(chatLayout);
+        add(getSectionHeader(), chatLayout);
     }
 
     private void addStyle() {
         chatLayout.expand(comments);
         chatLayout.addClassName("comment-section-body");
+        input.setId("comment-input");
+        setCommentInputPlaceholder();
+    }
+
+    private Div getSectionHeader() {
+        H3 title = new H3("Comments (" + getCommentsForRecipe().size() + ")");
+        Div sectionHeader = new Div(title);
+        sectionHeader.addClassName("comment-section-header");
+        return sectionHeader;
     }
 
     private void updateCommentsForRecipe() {
         chatLayout.remove(comments);
-        List<Comment> commentsByRecipeId = commentService.getCommentsByRecipeId(recipe.getId());
         List<MessageListItem> listOfCommentItems = new ArrayList<>();
-        for (Comment comment : commentsByRecipeId) {
+        for (Comment comment : getCommentsForRecipe()) {
             String text = comment.getText();
             Instant datePosted = comment.getDatePosted().toInstant(ZoneOffset.UTC);
             String username = comment.getUser().getUsername();
@@ -77,4 +88,17 @@ public class CommentSection extends Section {
         });
     }
 
+    private void setCommentInputPlaceholder() {
+        String script = """
+                const commentInput = document.getElementById('comment-input');
+                const textarea =  commentInput.querySelector('textarea');
+                textarea.setAttribute('placeholder', 'Comments');
+                """;
+
+        UI.getCurrent().getPage().executeJs(script);
+    }
+
+    private List<Comment> getCommentsForRecipe() {
+        return commentService.getCommentsByRecipeId(recipe.getId());
+    }
 }
