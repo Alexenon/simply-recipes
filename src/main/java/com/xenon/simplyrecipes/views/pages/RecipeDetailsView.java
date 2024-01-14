@@ -44,8 +44,9 @@ public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
 
     private void initialize() {
         removeAll();
-        Div content = new Div();
         addClassName("recipe-details");
+        Div content = new Div();
+        content.addClassName("recipe-details-content");
         content.add(
                 getHeader(),
                 getImage(),
@@ -133,7 +134,7 @@ public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
         CommentSection commentSection = new CommentSection(recipe, commentService, userService);
         commentSection.addClassName("comment-section");
 
-        Div sectionHeader = new Div(new H2("Comments"));
+        Div sectionHeader = new Div(new H3("Comments"));
         sectionHeader.addClassName("comment-section-header");
         commentSection.addComponentAsFirst(sectionHeader);
 

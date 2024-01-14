@@ -35,7 +35,7 @@ public class RecipesView extends Main implements HasUrlParameter<String> {
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String categoryName) {
         this.categoryName = categoryName;
-        simulateProgressBar();
+//        simulateProgressBar();
         initialize();
     }
 
@@ -44,7 +44,7 @@ public class RecipesView extends Main implements HasUrlParameter<String> {
         ProgressBar progressBar = new ProgressBar();
         add(progressBar);
         progressBar.setIndeterminate(true);
-        Thread.sleep(2000);
+        Thread.sleep(500);
         progressBar.setIndeterminate(false);
         remove(progressBar);
     }

@@ -38,14 +38,15 @@ public class CommentSection extends Section {
     }
 
     private void initialize() {
-        chatLayout.add(input, comments);
         updateCommentsForRecipe();
         setupAddCommentListener();
+        chatLayout.add(input, comments);
         add(chatLayout);
     }
 
     private void addStyle() {
         chatLayout.expand(comments);
+        chatLayout.addClassName("comment-section-body");
     }
 
     private void updateCommentsForRecipe() {

@@ -26,6 +26,7 @@ import java.util.List;
  * https://food52.com/recipes/new
  * */
 
+@SuppressWarnings("FieldCanBeLocal")
 public class AddRecipeDialog extends Dialog {
 
     private static final int DEFAULT_INGREDIENT_AMOUNT = 0;
@@ -107,15 +108,12 @@ public class AddRecipeDialog extends Dialog {
 
         addIngredientBtn.addClassName("add-ingredient-btn");
         addIngredientBtn.addClickListener(e -> {
-            IngredientLayout ingredientLayoutFromFields = getIngredientLayoutFromFields();
-            add(ingredientLayoutFromFields);
+            this.add(new IngredientLayout(ingredientName.getValue(), ingredientAmount.getValue()));
+
+            // Clearing after adding layout
             ingredientName.setValue("");
             ingredientAmount.setValue(DEFAULT_INGREDIENT_AMOUNT);
         });
-    }
-
-    private IngredientLayout getIngredientLayoutFromFields() {
-        return new IngredientLayout(ingredientName.getValue(), ingredientAmount.getValue());
     }
 
     private static class IngredientLayout extends HorizontalLayout {
@@ -146,6 +144,7 @@ public class AddRecipeDialog extends Dialog {
 //                    ingredientName.getText(),
 //                    Integer.parseInt(ingredientAmount.getText())
 //            );
+
         }
     }
 

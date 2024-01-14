@@ -90,6 +90,14 @@
 /* Comments Section */
 
 .comment-section {
+    margin-top: 40px;
+}
+
+.comment-section-header {
+    margin: 0 -50px 0 -40px;
+}
+
+.comment-section-body {
     border: 1px solid black;
     margin: 0 -50px 0 -50px;
 }

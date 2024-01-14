@@ -45,6 +45,8 @@ public class IngredientUploader extends VerticalLayout {
 
         addIngredientBtn.addClassName("add-ingredient-btn");
         addIngredientBtn.addClickListener(e -> {
+            if(ingredientName.isEmpty()) return;
+
             IngredientLayout ingredientLayoutFromFields = getIngredientLayoutFromFields();
             add(ingredientLayoutFromFields);
             ingredientList.add(ingredientLayoutFromFields.getIngredient());

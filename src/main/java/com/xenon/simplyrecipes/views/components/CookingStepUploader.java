@@ -34,8 +34,10 @@ public class CookingStepUploader extends VerticalLayout {
         cookingStepNameField.setRequired(true);
         cookingStepNameField.setMinLength(3);
 
-        addCookingStepBtn.addClassName("add-ingredient-btn");
+        addCookingStepBtn.getStyle().set("margin-top", "-15px");
         addCookingStepBtn.addClickListener(e -> {
+            if(cookingStepNameField.isEmpty()) return;
+
             CookingStepLayout cookingStepLayout = new CookingStepLayout(cookingStepNameField.getValue());
             add(cookingStepLayout);
             listOfCookingSteps.add(cookingStepLayout.getCookingStep());

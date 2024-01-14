@@ -2,6 +2,7 @@ package com.xenon.simplyrecipes.views.components;
 
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.Unit;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
@@ -12,6 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.*;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +32,8 @@ public class UploadImage extends Div {
     public UploadImage() {
         Upload upload = createUploadComponent();
         Div output = new Div(new Text("(no image file uploaded yet)"));
-        setupUploadListeners(upload, output);
+        upload.setUploadButton(new Button("Upload Recipe Image"));
+        setupUploadListener(upload, output);
 
         add(upload, output);
     }
@@ -44,7 +47,7 @@ public class UploadImage extends Div {
         return upload;
     }
 
-    private void setupUploadListeners(Upload upload, Div output) {
+    private void setupUploadListener(Upload upload, Div output) {
         upload.addSucceededListener(event -> {
             output.removeAll();
             Image uploadedImage = getUploadedImage();
@@ -90,7 +93,7 @@ public class UploadImage extends Div {
     private OutputStream receiveUpload(String originalFileName, String MIMEType) {
         this.originalFileName = originalFileName;
         try {
-            this.file = createFile();
+            this.file = createFile().orElseThrow(() -> new IOException("Failed to receive file"));
             return new FileOutputStream(file);
         } catch (IOException e) {
             logError("Failed to create InputStream for: '" + this.file.getAbsolutePath(), e);
@@ -99,11 +102,9 @@ public class UploadImage extends Div {
         return null;
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    private File createFile() throws IOException {
+    private Optional<File> createFile() throws IOException {
         File file = new File(FOLDER_PATH + originalFileName);
-        file.createNewFile();
-        return file;
+        return file.createNewFile() ? Optional.of(file) : Optional.empty();
     }
 
     public String getUploadedFilePath() {
