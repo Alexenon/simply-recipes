@@ -7,7 +7,6 @@ import com.xenon.simplyrecipes.entities.Ingredient;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 public class RecipeRequest {
@@ -16,7 +15,7 @@ public class RecipeRequest {
     String imageName;
     Integer preparingDuration;
     Integer cookingDuration;
-    Set<Category> categories;
+    List<Category> categories;
     List<Ingredient> ingredients;
     List<CookingStep> cookingSteps;
     List<Comment> comments;

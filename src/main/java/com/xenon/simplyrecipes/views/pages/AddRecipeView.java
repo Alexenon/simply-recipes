@@ -24,6 +24,7 @@ import com.xenon.simplyrecipes.entities.Category;
 import com.xenon.simplyrecipes.entities.Recipe;
 import com.xenon.simplyrecipes.services.CategoryService;
 import com.xenon.simplyrecipes.services.RecipeManagementService;
+import com.xenon.simplyrecipes.utils.SetToListConverter;
 import com.xenon.simplyrecipes.views.MainLayout;
 import com.xenon.simplyrecipes.views.components.CookingStepUploader;
 import com.xenon.simplyrecipes.views.components.IngredientUploader;
@@ -31,7 +32,6 @@ import com.xenon.simplyrecipes.views.components.UploadImage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
 
 /*
@@ -117,7 +117,7 @@ public class AddRecipeView extends Main {
         Recipe recipeToBeSaved = new Recipe();
         recipeToBeSaved.setName(recipeTitle.getValue());
         recipeToBeSaved.setDescription(recipeDescription.getValue());
-        recipeToBeSaved.setCategories(new HashSet<>(categoryMultiselect.getValue()));
+        recipeToBeSaved.setCategories(categoryMultiselect.getValue().stream().toList());
         recipeToBeSaved.setPreparingDuration(recipePreparingDuration.getValue());
         recipeToBeSaved.setCookingDuration(recipeCookingDuration.getValue());
         recipeToBeSaved.setIngredients(ingredientUploader.getIngredientList());
@@ -172,6 +172,7 @@ public class AddRecipeView extends Main {
         binder.forField(categoryMultiselect)
                 .asRequired("Please select at least one category")
                 .withValidator(list -> list.size() <= 5, "Please select up to 5 categories")
+                .withConverter(new SetToListConverter())
                 .bind(Recipe::getCategories, Recipe::setCategories);
 
         binder.forField(recipeCookingDuration)

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @Entity(name = "recipes")
 @Component
@@ -47,7 +46,7 @@ public class Recipe {
     )
     @Getter
     @Setter
-    private Set<Category> categories;
+    private List<Category> categories;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Getter
