@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route(value = "recipe-details", layout = MainLayout.class)
 public class RecipeDetailsView extends Main implements HasUrlParameter<Long> {
 
-    private static final String FOLDER_LOCATION = "./images/";
+    private static final String FOLDER_LOCATION = "./recipe-images/";
 
     @Autowired
     private RecipeService recipeService;

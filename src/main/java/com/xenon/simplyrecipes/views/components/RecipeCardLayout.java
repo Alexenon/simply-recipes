@@ -15,7 +15,7 @@ import com.xenon.simplyrecipes.views.pages.RecipeDetailsView;
 //https://codepen.io/FairyWsr/details/RwvpzaE
 public class RecipeCardLayout extends Div {
 
-    private static final String FOLDER_LOCATION = "./images/";
+    private static final String FOLDER_LOCATION = "./recipe-images/";
     private final Recipe recipe;
 
     private final H2 title;
