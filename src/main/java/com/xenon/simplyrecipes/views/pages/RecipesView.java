@@ -18,7 +18,6 @@ import java.util.List;
 public class RecipesView extends Main implements HasUrlParameter<String> {
 
     // TODO: Implement /all recipes
-    //  - fix bug with moving from categorized recipes to all recipes
 
     @Autowired
     private RecipeService recipeService;
@@ -36,6 +35,7 @@ public class RecipesView extends Main implements HasUrlParameter<String> {
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String categoryName) {
         this.categoryName = categoryName;
+        removeAll();
         initialize();
     }
 
